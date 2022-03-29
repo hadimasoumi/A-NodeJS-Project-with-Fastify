@@ -31,11 +31,8 @@ class TradeRepository {
         {
           model: models.User,
           attributes: ["id", "name"],
-
-          // where: { is_active: true },
           required: true,
-          order: [["id", "DESC"]],
-          // limit: 8,
+          order: [["id", "ASC"]],
         },
       ],
     });
@@ -51,6 +48,25 @@ class TradeRepository {
         symbol: trade.symbol,
         shares: trade.shares,
         price: trade.price,
+      });
+      return result;
+    } catch (error) {}
+  }
+
+  public async getTradeByUserId(id: number): Promise<any> {
+    try {
+      const result = await models.Trade.findAll({
+        include: [
+          {
+            model: models.User,
+            attributes: ["id", "name"],
+            required: true,
+            order: [["id", "ASC"]],
+            where: {
+              id: id,
+            },
+          },
+        ],
       });
       return result;
     } catch (error) {}

@@ -18,6 +18,15 @@ async function createTrade(reqCreate: createTrade) {
   }
 }
 
+async function getTradeByUserId(UserID: number) {
+  const tradeRepository = TradeRepository.getInstance();
+  try {
+    return await tradeRepository.getTradeByUserId(UserID);
+  } catch (err) {
+    throw new Error(`400 : Save data is not successfully`);
+  }
+}
+
 // async function deleteAllTrades(): Promise<string> {
 //   const todoRepository = TradeRepository.getInstance();
 //   const deleteResult: number = await todoRepository.deleteAllTrades();
@@ -33,5 +42,6 @@ async function createTrade(reqCreate: createTrade) {
 export default {
   findAllTrades,
   createTrade,
+  getTradeByUserId,
   // deleteAllTrades,
 };

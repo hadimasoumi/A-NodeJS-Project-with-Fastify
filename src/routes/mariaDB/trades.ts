@@ -3,8 +3,6 @@ import TradeUsecase from "../../controllers/sequelize/trade.controller";
 import responseHandler from "../../helper/response.handler";
 import { createTrade } from "../../entities/dtos/todo.dto";
 
-import TradeRepository from "../../repositories/sequelize/trade.repository";
-
 class TodoRoutes {
   public prefix_route = "/trades";
 
@@ -29,6 +27,20 @@ class TodoRoutes {
           console.log(reqCreate);
 
           const data = await TradeUsecase.createTrade(reqCreate);
+          return data;
+        },
+        reply,
+        201
+      );
+      await reply;
+    });
+
+    fastify.get(`/users/:UserID`, async (request, reply) => {
+      responseHandler(
+        async () => {
+          const params = request.params as { UserID: string };
+          const UserID = parseInt(params["UserID"], 10);
+          const data = await TradeUsecase.getTradeByUserId(UserID);
           return data;
         },
         reply,
