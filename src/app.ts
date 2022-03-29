@@ -1,65 +1,38 @@
-import Boom from '@hapi/boom';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import express from 'express';
-import expressPinoLogger from 'express-pino-logger';
-import path from 'path';
-import pino from 'pino';
-import { indexRouter } from './routes';
+import fastify, { FastifyInstance } from "fastify";
+import config from "./config";
+class App {
+  public app: FastifyInstance;
+  public app_domain: string = config.app.domain;
+  public app_port: number = parseInt(`${config.app.port}`, 10) ?? 8080;
 
-const logger = pino({});
+  constructor(appInit: { plugins: any; routes: any }) {
+    this.app = fastify({ logger: true });
 
-const app = express();
-const port = 3002;
+    this.routes(appInit.routes);
+  }
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+  public routes(routes: { forEach: (arg0: (routes: any) => void) => void }) {
+    routes.forEach((route) => {
+      let router = new route();
+      this.app.register(router.routes, { prefix: router.prefix_route });
+    });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+    this.app.get(`/`, (request, reply) => {
+      reply.send({ healthcheck: "server is alive" });
+    });
 
+    this.app.get("/healthcheck", async (request, reply) => {
+      reply.send({ healthcheck: "server is alive" });
+    });
+  }
 
-app.use('/', indexRouter);
-//app.use('/trades', trades);
-//app.use('/erase', erase);
-//app.use('/stocks', stocks);
+  public listen() {
+    this.app.listen(this.app_port, () => {
+      console.log(
+        `App listening on the http://${this.app_domain}:${this.app_port} 🌟👻`
+      );
+    });
+  }
+}
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-    const err = Boom.notFound('Route not found');
-    next(err);
-});
-
-// error handler
-app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
-
-
-app.addListener('error', (error) => {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EADDRINUSE':
-            console.error(`${port} is already in use`);
-            process.exit(1);
-        default:
-            throw error;
-    }
-});
-
-
-app.listen(port, () => logger.info(`Example app listening at http://localhost:${port}`))
-
-export { app };
+export default App;

@@ -1,4 +1,19 @@
-const express = require('express');
-const router = express.Router();
+import { FastifyInstance, FastifyPluginOptions } from "fastify";
 
-// Routes related to stocks
+class TodoRoutes {
+  public prefix_route = "/stocks";
+
+  async routes(
+    fastify: FastifyInstance,
+    options: FastifyPluginOptions,
+    done: any
+  ) {
+    fastify.get(`/`, (request, reply) => {
+      reply.send("stocks");
+    });
+
+    done();
+  }
+}
+
+export default TodoRoutes;
