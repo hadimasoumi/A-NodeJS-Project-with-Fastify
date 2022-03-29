@@ -8,45 +8,56 @@ import {
 import sequelize from "../../../adapters/sequelizeORM";
 
 // ───────────────────────────────────────────────────────────────── Schema ─────
-
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  declare id: CreationOptional<number>;
-  declare name: string;
-  // createdAt can be undefined during creation
-  declare createdAt: CreationOptional<Date>;
-  // updatedAt can be undefined during creation
-  declare updatedAt: CreationOptional<Date>;
-}
-
-class Trade extends Model<
-  InferAttributes<Trade>,
-  InferCreationAttributes<Trade>
-> {
+class Trade extends Model {
   declare id: CreationOptional<number>;
   declare type: "buy" | "sell";
-  declare User: any;
+  declare user_id: number;
   declare symbol: string;
   declare shares: number;
   declare price: number; // float with 2 decimal
-  declare timestamp: string;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
 }
 
-User.init(
+Trade.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: new DataTypes.STRING(128),
+    user_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    symbol: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    shares: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
   },
   {
-    tableName: "users",
+    tableName: "trades",
     sequelize, // passing the `sequelize` instance is required
   }
 );
+
+export default Trade;

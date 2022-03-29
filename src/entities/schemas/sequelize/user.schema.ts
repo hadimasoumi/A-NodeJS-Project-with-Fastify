@@ -9,8 +9,8 @@ import sequelize from "../../../adapters/sequelizeORM";
 
 // ───────────────────────────────────────────────────────────────── Schema ─────
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  declare id: CreationOptional<number>;
+class User extends Model {
+  declare id: number;
   declare name: string;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -19,7 +19,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -27,14 +27,21 @@ User.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
   },
   {
     tableName: "users",
     sequelize, // passing the `sequelize` instance is required
   }
 );
+
+export default User;
 
 // const User = sequelize.define(
 //   "User",

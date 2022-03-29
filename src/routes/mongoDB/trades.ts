@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
-import TradeUsecase from "../usecase/trade.usecase";
-import responseHandler from "../helper/response.handler";
-import { createTrade } from "../entities/dtos/todo.dto";
+import TradeUsecase from "../../controllers/mongoose/trade.usecase";
+import responseHandler from "../../helper/response.handler";
+import { createTrade } from "../../entities/dtos/todo.dto";
 
 class TodoRoutes {
   public prefix_route = "/trades";

@@ -1,6 +1,10 @@
 interface createTrade {
-  task_name: string;
-  task_content: string;
+  id: number;
+  type: "buy" | "sell";
+  user_id: number;
+  symbol: string;
+  shares: number;
+  price: number;
 }
 
 // interface deleteDTO {

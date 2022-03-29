@@ -8,7 +8,6 @@ export const responseSender = async (
   reply: FastifyReply
 ): Promise<void> => {
   await errorHandler.reply(data, reply);
-  reply.code(201);
   reply.send(data);
 };
 

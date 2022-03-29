@@ -1,9 +1,9 @@
 import { model, Model, Mongoose } from "mongoose";
-import { TradeInterface } from "../entities/interfaces/mongoose/trade.interface";
-import { TradeSchema } from "../entities/schemas/mongoose/trade.schema";
-import { createTrade } from "../entities/dtos/todo.dto";
+import { TradeInterface } from "../../entities/interfaces/mongoose/trade.interface";
+import { TradeSchema } from "../../entities/schemas/mongoose/trade.schema";
+import { createTrade } from "../../entities/dtos/todo.dto";
 
-import config from "../config";
+import config from "../../config";
 
 class TradeRepository {
   private static instance: TradeRepository;
