@@ -1,30 +1,30 @@
-import {
-  CreationOptional,
-  InferAttributes,
-  InferCreationAttributes,
-  Model,
-  DataTypes,
-} from "@sequelize/core";
+import { CreationOptional, Model, DataTypes } from "@sequelize/core";
 import sequelize from "../../adapters/sequelizeORM";
 
 // ───────────────────────────────────────────────────────────────── Schema ─────
-
-class User extends Model {
-  declare id: number;
-  declare name: string;
+class StockHistory extends Model {
+  declare id: CreationOptional<number>;
+  declare symbol: string;
+  declare price: number;
+  declare trade_id: number;
+  declare stock_id: number;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
-User.init(
+StockHistory.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: new DataTypes.STRING(50),
+    stock_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    trade_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdAt: {
@@ -36,9 +36,9 @@ User.init(
     },
   },
   {
-    tableName: "users",
+    tableName: "stocks_histories",
     sequelize,
   }
 );
 
-export default User;
+export default StockHistory;

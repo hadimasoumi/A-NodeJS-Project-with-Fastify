@@ -1,17 +1,26 @@
-import { TradeInterface } from "../entities/interfaces/data/trade.interface";
+import { CreateTradeInterface } from "../entities/interfaces/trade.interface";
 import TradeRepository from "../repositories/trade.repository";
-
-import { createTrade } from "../entities/dtos/todo.dto";
+import stockController from "../controllers/stock.controller";
+import stockHistoryController from "../controllers/stockHistory.controller";
 
 async function findAllTrades() {
   const tradeRepository = TradeRepository.getInstance();
   return await tradeRepository.findAllTrades();
 }
 
-async function createTrade(reqCreate: createTrade) {
+async function createTrade(reqCreate: CreateTradeInterface) {
   const tradeRepository = TradeRepository.getInstance();
   try {
-    await tradeRepository.createTrade(reqCreate);
+    const trade = await tradeRepository.createTrade(reqCreate);
+    await stockController.updateStock({
+      id: reqCreate.stock_id,
+      price: reqCreate.price,
+    });
+    const history = await stockHistoryController.createStockHistory({
+      stock_id: reqCreate.stock_id,
+      price: reqCreate.price,
+      trade_id: trade.id,
+    });
     return `200 : Save data is successfully`;
   } catch (err) {
     throw new Error(`400 : Save data is not successfully`);

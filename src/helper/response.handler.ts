@@ -1,5 +1,5 @@
 import { FastifyReply } from "fastify";
-import { ResponseInterface } from "../entities/interfaces/data/response.interface";
+import { ResponseInterface } from "../entities/interfaces/response.interface";
 import errorHandler from "./errors.handler";
 import parseResponse from "./response.parser";
 

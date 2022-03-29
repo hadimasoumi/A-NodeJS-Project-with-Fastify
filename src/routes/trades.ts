@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import TradeUsecase from "../controllers/trade.controller";
 import responseHandler from "../helper/response.handler";
-import { createTrade } from "../entities/dtos/todo.dto";
+import { CreateTradeInterface } from "../entities/interfaces/trade.interface";
 
 class TodoRoutes {
   public prefix_route = "/trades";
@@ -23,7 +23,8 @@ class TodoRoutes {
     fastify.post(`/create`, async (request, reply) => {
       responseHandler(
         async () => {
-          const reqCreate: createTrade = request.body as createTrade;
+          const reqCreate: CreateTradeInterface =
+            request.body as CreateTradeInterface;
           console.log(reqCreate);
 
           const data = await TradeUsecase.createTrade(reqCreate);

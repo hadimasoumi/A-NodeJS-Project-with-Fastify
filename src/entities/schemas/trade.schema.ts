@@ -12,7 +12,7 @@ class Trade extends Model {
   declare id: CreationOptional<number>;
   declare type: "buy" | "sell";
   declare user_id: number;
-  declare symbol: string;
+  declare stock_id: number;
   declare shares: number;
   declare price: number; // float with 2 decimal
   declare createdAt: CreationOptional<Date>;
@@ -30,11 +30,11 @@ Trade.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    type: {
-      type: DataTypes.STRING,
+    stock_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    symbol: {
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -56,7 +56,7 @@ Trade.init(
   },
   {
     tableName: "trades",
-    sequelize, // passing the `sequelize` instance is required
+    sequelize,
   }
 );
 

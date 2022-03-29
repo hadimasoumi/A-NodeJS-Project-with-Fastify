@@ -1,17 +1,6 @@
 import models from "../entities/schemas";
-// class TradeRepository {
-//   constructor() {}
-
-//   public async findAllTrades() {
-//     models.Trade.findAll();
-//   }
-// }
-
-// export default TradeRepository;
-
 import config from "../config";
-import { TradeInterface } from "../entities/interfaces/data/trade.interface";
-import { createTrade } from "../entities/dtos/todo.dto";
+import { CreateTradeInterface } from "../entities/interfaces/trade.interface";
 
 class TradeRepository {
   private static instance: TradeRepository;
@@ -40,12 +29,12 @@ class TradeRepository {
     // as TradeInterface[];
   }
 
-  public async createTrade(trade: createTrade): Promise<any> {
+  public async createTrade(trade: CreateTradeInterface): Promise<any> {
     try {
       const result = await models.Trade.create({
         type: trade.type,
         user_id: trade.user_id,
-        symbol: trade.symbol,
+        stock_id: trade.stock_id,
         shares: trade.shares,
         price: trade.price,
       });
