@@ -1,5 +1,5 @@
-import { UserInterface } from "./user.interface";
-import { TradeInterface } from "./trade.interface";
+import { UserInterface } from "../mongoose/user.interface";
+import { TradeInterface } from "../mongoose/trade.interface";
 interface dataInterface {
   code: number;
   message: string;

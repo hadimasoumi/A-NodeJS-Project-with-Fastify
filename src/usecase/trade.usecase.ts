@@ -1,4 +1,4 @@
-import { TradeInterface } from "../entities/interfaces/data/trade.interface";
+import { TradeInterface } from "../entities/interfaces/mongoose/trade.interface";
 import TradeRepository from "../repositories/trade.repository";
 
 import { createTrade } from "../entities/dtos/todo.dto";

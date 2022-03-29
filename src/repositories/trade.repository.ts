@@ -1,6 +1,6 @@
 import { model, Model, Mongoose } from "mongoose";
-import { TradeInterface } from "../entities/interfaces/data/trade.interface";
-import { TradeSchema } from "../entities/schemas/trade.schema";
+import { TradeInterface } from "../entities/interfaces/mongoose/trade.interface";
+import { TradeSchema } from "../entities/schemas/mongoose/trade.schema";
 import { createTrade } from "../entities/dtos/todo.dto";
 
 import config from "../config";
