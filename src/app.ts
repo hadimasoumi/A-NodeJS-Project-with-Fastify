@@ -1,6 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
 import config from "./config";
 import MongoAdapter from "./adapters/mongo.adapter";
+import MariaDBAdapter from "./adapters/mariadb.adapter";
 
 class App {
   public app: FastifyInstance;
@@ -16,9 +17,18 @@ class App {
     authName: config.db.mongo.auth!,
   };
 
+  private mariaDBDatabaseInfo = {
+    username: config.db.mariaDB.username!,
+    password: config.db.mariaDB.password!,
+    host: config.db.mariaDB.host!,
+    port: parseInt(`${config.db.mariaDB.port}`, 10) ?? 3306,
+    dbName: config.db.mariaDB.name!,
+  };
+
   constructor(appInit: { plugins: any; routes: any }) {
     this.app = fastify({ logger: true });
     this.connectMongo();
+    this.connectMariaDB();
     this.routes(appInit.routes);
   }
 
@@ -26,6 +36,11 @@ class App {
     let { username, password, host, port, dbName, authName } =
       this.mongoDatabaseInfo;
     await new MongoAdapter(username, password, host, port, dbName, authName);
+  }
+
+  private async connectMariaDB() {
+    let { username, password, host, port, dbName } = this.mariaDBDatabaseInfo;
+    await new MariaDBAdapter(username, password, host, port, dbName);
   }
 
   public routes(routes: { forEach: (arg0: (routes: any) => void) => void }) {
