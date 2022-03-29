@@ -1,5 +1,5 @@
 import sequelize from "./sequelizeORM";
-import "../entities/schemas/sequelize";
+import "../entities/schemas";
 
 sequelize
   .sync({ force: false })

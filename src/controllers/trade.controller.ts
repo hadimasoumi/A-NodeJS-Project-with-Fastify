@@ -1,7 +1,7 @@
-import { TradeInterface } from "../../entities/interfaces/mongoose/trade.interface";
-import TradeRepository from "../../repositories/sequelize/trade.repository";
+import { TradeInterface } from "../entities/interfaces/data/trade.interface";
+import TradeRepository from "../repositories/trade.repository";
 
-import { createTrade } from "../../entities/dtos/todo.dto";
+import { createTrade } from "../entities/dtos/todo.dto";
 
 async function findAllTrades() {
   const tradeRepository = TradeRepository.getInstance();

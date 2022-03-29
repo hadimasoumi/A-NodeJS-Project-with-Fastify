@@ -1,4 +1,4 @@
-import models from "../../entities/schemas/sequelize";
+import models from "../entities/schemas";
 // class TradeRepository {
 //   constructor() {}
 
@@ -9,9 +9,9 @@ import models from "../../entities/schemas/sequelize";
 
 // export default TradeRepository;
 
-import config from "../../config";
-import { TradeInterface } from "../../entities/interfaces/mongoose/trade.interface";
-import { createTrade } from "../../entities/dtos/todo.dto";
+import config from "../config";
+import { TradeInterface } from "../entities/interfaces/data/trade.interface";
+import { createTrade } from "../entities/dtos/todo.dto";
 
 class TradeRepository {
   private static instance: TradeRepository;
