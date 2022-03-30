@@ -7,7 +7,13 @@ export const responseSender = async (
   data: ResponseInterface,
   reply: FastifyReply
 ): Promise<void> => {
-  await errorHandler.reply(data, reply);
+  if ("success" in data) {
+    reply
+      .header("Content-Type", "application/json;charset=utf-8")
+      .code(data.success.code);
+  } else {
+    await errorHandler.reply(data, reply);
+  }
   reply.send(data);
 };
 
@@ -18,10 +24,9 @@ const responseHandler = async (
 ): Promise<void> => {
   try {
     const data: ResponseInterface = await next();
-    reply.code(201);
     responseSender(parseResponse(data), reply);
   } catch (error) {
-    responseSender(parseResponse(error), reply);
+    responseSender(parseResponse(error as Error), reply);
   }
 };
 

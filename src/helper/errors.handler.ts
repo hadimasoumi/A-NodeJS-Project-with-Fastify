@@ -5,8 +5,6 @@ const reply = async (
   replyponseData: ResponseInterface,
   reply: FastifyReply
 ) => {
-  reply.header("Content-Type", "application/json;charset=utf-8").code(200);
-
   if ("error" in replyponseData) {
     switch (replyponseData.error.code) {
       case 400: {

@@ -23,7 +23,7 @@ const setFormatSuccess = (code: number, message: string): SuccessInterface => {
 };
 
 const parseResponse = (data: ResponseInterface) => {
-  if (data.constructor === Error) {
+  if (data?.constructor === Error) {
     // Check data is instance of Error?
     // Error => `Error: 400 : Invalid input, Please input field: id, country`
     const errorSpliter = data.toString().split(": "); // ['Error', code , error-msg]
