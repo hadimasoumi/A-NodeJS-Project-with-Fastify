@@ -40,7 +40,10 @@ class TradeRepository {
       stock_id: trade.stock_id,
       shares: trade.shares,
       price: trade.price,
+      createdAt: trade.createdAt,
+      updatedAt: trade.updatedAt,
     };
+
     if (trade.id != undefined) object["id"] = trade.id;
     console.log("object ---> ", object);
     return models.Trade.create(object);

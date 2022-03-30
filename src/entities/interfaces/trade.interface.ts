@@ -7,6 +7,7 @@ interface TradeCreateRequestInterface {
   readonly shares: number;
   readonly price: number;
   readonly id?: number;
+  timestamp?: string;
 }
 interface TradeGetResponseInterface {
   id: number;
@@ -24,6 +25,8 @@ interface TradeCreateDBInterface {
   readonly shares: number;
   readonly price: number;
   readonly id?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export {

@@ -24,11 +24,10 @@ async function findAllTrades() {
           symbol: trade.Stock.symbol,
           shares: trade.shares,
           price: trade.price,
-          timestamp: moment(trade.createdAt).format("yyyy-MM-DD, HH:mm:ss"),
+          timestamp: moment(trade.createdAt).format("yyyy-MM-DD HH:mm:ss"),
           user: trade.User,
         });
       }
-
       return res;
     })
     .catch((error) => {
@@ -52,12 +51,11 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
       reqCreate.symbol
     );
     const user = await userController.getUserById(reqCreate.user.id);
-    console.log("user ---> ", user);
     if (user.length == 0) {
       await userController.createUser(reqCreate.user);
     }
 
-    const reqCreateDB: TradeCreateDBInterface = {
+    let reqCreateDB: TradeCreateDBInterface = {
       id: reqCreate.id,
       user_id: reqCreate.user.id,
       stock_id: stock[0].id,
@@ -65,6 +63,12 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
       shares: reqCreate.shares,
       type: reqCreate.type,
     };
+
+    if (reqCreate.timestamp != undefined) {
+      reqCreateDB.createdAt = reqCreate.timestamp;
+      reqCreateDB.updatedAt = reqCreate.timestamp;
+    }
+
     await tradeRepository
       .createTrade(reqCreateDB)
       .then(async (result) => {
