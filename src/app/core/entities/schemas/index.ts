@@ -31,13 +31,13 @@ Stock.hasMany(Trade, {
   },
 });
 
-// StockHistory.belongsTo(Trade, {
-//   foreignKey: {
-//     name: "trade_id",
-//     allowNull: false,
-//   },
-//   onDelete: "NO ACTION",
-// });
+StockHistory.belongsTo(Trade, {
+  foreignKey: {
+    name: "trade_id",
+    allowNull: false,
+  },
+  onDelete: "CASCADE",
+});
 
 StockHistory.belongsTo(Stock, {
   foreignKey: {

@@ -23,7 +23,9 @@ class StockRoutes {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
         const symbol = params["Symbol"];
-        const data = await stockHistoryController.findAllStockHistory(symbol);
+        const data = await stockHistoryController.findAllStockHistoryBySymbol(
+          symbol
+        );
         return data;
       }, reply);
       await reply;
