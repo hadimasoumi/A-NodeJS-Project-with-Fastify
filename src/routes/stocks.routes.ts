@@ -2,7 +2,8 @@ import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import stockController from "../controllers/stock.controller";
 import stockHistoryController from "../controllers/stockHistory.controller";
 import responseHandler from "../helper/response.handler";
-class TodoRoutes {
+import { StockCreateInterface } from "../entities/interfaces/stock.interface";
+class StockRoutes {
   public prefix_route = "/stocks";
 
   async routes(
@@ -40,8 +41,19 @@ class TodoRoutes {
       await reply;
     });
 
+    fastify.post(`/`, async (request, reply) => {
+      responseHandler(async () => {
+        const reqCreate: StockCreateInterface =
+          request.body as StockCreateInterface;
+        console.log(reqCreate);
+        const data = await stockController.createStock(reqCreate);
+        return data;
+      }, reply);
+      await reply;
+    });
+
     done();
   }
 }
 
-export default TodoRoutes;
+export default StockRoutes;

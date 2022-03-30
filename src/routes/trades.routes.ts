@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
-import TradeUsecase from "../controllers/trade.controller";
+import TradeController from "../controllers/trade.controller";
 import responseHandler from "../helper/response.handler";
-import { CreateTradeInterface } from "../entities/interfaces/trade.interface";
+import { TradeCreateRequestInterface } from "../entities/interfaces/trade.interface";
 
-class TodoRoutes {
+class TradeRoutes {
   public prefix_route = "/trades";
 
   async routes(
@@ -13,21 +13,21 @@ class TodoRoutes {
   ) {
     fastify.get(`/`, async (request, reply) => {
       responseHandler(async () => {
-        const data = await TradeUsecase.findAllTrades();
+        const data = await TradeController.findAllTrades();
 
         return data;
       }, reply);
       await reply;
     });
 
-    fastify.post(`/create`, async (request, reply) => {
+    fastify.post(`/`, async (request, reply) => {
       responseHandler(
         async () => {
-          const reqCreate: CreateTradeInterface =
-            request.body as CreateTradeInterface;
+          const reqCreate: TradeCreateRequestInterface =
+            request.body as TradeCreateRequestInterface;
           console.log(reqCreate);
 
-          const data = await TradeUsecase.createTrade(reqCreate);
+          const data = await TradeController.createTrade(reqCreate);
           return data;
         },
         reply,
@@ -41,7 +41,7 @@ class TodoRoutes {
         async () => {
           const params = request.params as { UserID: string };
           const UserID = parseInt(params["UserID"], 10);
-          const data = await TradeUsecase.getTradeByUserId(UserID);
+          const data = await TradeController.getTradeByUserId(UserID);
           return data;
         },
         reply,
@@ -54,4 +54,4 @@ class TodoRoutes {
   }
 }
 
-export default TodoRoutes;
+export default TradeRoutes;
