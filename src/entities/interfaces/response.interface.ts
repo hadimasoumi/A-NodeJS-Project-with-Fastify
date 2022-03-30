@@ -1,5 +1,5 @@
 import { UserInterface } from "./user.interface";
-import { CreateTradeInterface } from "./trade.interface";
+import { TradeCreateRequestInterface } from "./trade.interface";
 interface dataInterface {
   code: number;
   message: string;
@@ -19,4 +19,22 @@ export type ResponseInterface =
   | SuccessInterface
   | ErrorInterface
   | UserInterface
-  | CreateTradeInterface;
+  | TradeCreateRequestInterface;
+
+// import { UserInterface } from "./user.interface";
+// import { TradeCreateRequestInterface } from "./trade.interface";
+// export interface ResponseDataInterface {
+//   data: {
+//     status;
+//     status_code: number;
+//     message: string;
+//     error: any;
+//   };
+// }
+
+// export type ResponseInterface =
+//   | String
+//   | Error
+//   | ResponseDataInterface
+//   | UserInterface
+//   | TradeCreateRequestInterface;

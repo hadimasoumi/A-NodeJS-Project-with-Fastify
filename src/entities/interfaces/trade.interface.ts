@@ -1,9 +1,33 @@
-interface CreateTradeInterface {
-  readonly type: "buy";
+import { UserInterface } from "./user.interface";
+
+interface TradeCreateRequestInterface {
+  readonly type: "buy" | "sell";
+  readonly user: UserInterface;
+  readonly symbol: string;
+  readonly shares: number;
+  readonly price: number;
+  readonly id?: number;
+}
+interface TradeGetResponseInterface {
+  id: number;
+  type: "buy" | "sell";
+  user: UserInterface;
+  symbol: string;
+  shares: number;
+  price: number;
+  timestamp: string;
+}
+interface TradeCreateDBInterface {
+  readonly type: "buy" | "sell";
   readonly user_id: number;
   readonly stock_id: number;
   readonly shares: number;
   readonly price: number;
+  readonly id?: number;
 }
 
-export { CreateTradeInterface };
+export {
+  TradeCreateRequestInterface,
+  TradeCreateDBInterface,
+  TradeGetResponseInterface,
+};

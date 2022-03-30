@@ -1,6 +1,19 @@
+interface StockInterface {
+  readonly id: number;
+  readonly symbol: string;
+  readonly name: string;
+  readonly price: number;
+  readonly total_shares: number;
+}
 interface StockUpdatePriceInterface {
   readonly id: number;
   readonly price: number;
 }
+interface StockCreateInterface {
+  symbol: string;
+  name: string;
+  price: number;
+  total_shares: number;
+}
 
-export { StockUpdatePriceInterface };
+export { StockInterface, StockUpdatePriceInterface, StockCreateInterface };

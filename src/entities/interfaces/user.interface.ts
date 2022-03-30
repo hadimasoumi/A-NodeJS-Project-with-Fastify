@@ -1,5 +1,5 @@
 interface UserInterface {
-  readonly id: string;
+  readonly id: number;
   readonly name: string;
 }
 
