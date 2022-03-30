@@ -1,5 +1,8 @@
 import models from "../entities/schemas";
-import { StockUpdatePriceInterface } from "../entities/interfaces/stock.interface";
+import {
+  StockUpdatePriceInterface,
+  StockCreateInterface,
+} from "../entities/interfaces/stock.interface";
 
 class StockRepository {
   private static instance: StockRepository;
@@ -29,6 +32,24 @@ class StockRepository {
           },
         }
       );
+      return result;
+    } catch (error) {}
+  }
+
+  public async getStockById(symbol: string): Promise<any> {
+    try {
+      const result = await models.Stock.findAll({
+        where: {
+          symbol: symbol,
+        },
+      });
+      return result;
+    } catch (error) {}
+  }
+
+  public async createStock(stock): Promise<any> {
+    try {
+      const result = await models.Stock.create(stock);
       return result;
     } catch (error) {}
   }

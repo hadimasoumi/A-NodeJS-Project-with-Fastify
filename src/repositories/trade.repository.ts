@@ -1,7 +1,6 @@
 import models from "../entities/schemas";
 import config from "../config";
-import { CreateTradeInterface } from "../entities/interfaces/trade.interface";
-
+import { TradeCreateDBInterface } from "../entities/interfaces/trade.interface";
 class TradeRepository {
   private static instance: TradeRepository;
 
@@ -21,25 +20,30 @@ class TradeRepository {
           model: models.User,
           attributes: ["id", "name"],
           required: true,
-          order: [["id", "ASC"]],
+        },
+        {
+          model: models.Stock,
+          attributes: ["symbol"],
+          required: true,
         },
       ],
+      order: [["id", "ASC"]],
     });
     return result;
     // as TradeInterface[];
   }
 
-  public async createTrade(trade: CreateTradeInterface): Promise<any> {
-    try {
-      const result = await models.Trade.create({
-        type: trade.type,
-        user_id: trade.user_id,
-        stock_id: trade.stock_id,
-        shares: trade.shares,
-        price: trade.price,
-      });
-      return result;
-    } catch (error) {}
+  public createTrade(trade: TradeCreateDBInterface): Promise<any> {
+    const object = {
+      type: trade.type,
+      user_id: trade.user_id,
+      stock_id: trade.stock_id,
+      shares: trade.shares,
+      price: trade.price,
+    };
+    if (trade.id != undefined) object["id"] = trade.id;
+    console.log("object ---> ", object);
+    return models.Trade.create(object);
   }
 
   public async getTradeByUserId(id: number): Promise<any> {
@@ -59,6 +63,25 @@ class TradeRepository {
       });
       return result;
     } catch (error) {}
+  }
+
+  public getTradeById(id: number): Promise<any> {
+    return models.Trade.findAll({
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  public async eraseTrades(): Promise<any> {
+    const res = await models.Trade.destroy({
+      // returning: true,
+      // checkExistance: true,
+      where: {},
+      force: true,
+    });
+    console.log("res ---> ", res);
+    return true;
   }
 }
 
