@@ -30,7 +30,7 @@ Stock.init(
       unique: true,
     },
     price: {
-      type: DataTypes.FLOAT(5),
+      type: DataTypes.FLOAT(2),
       allowNull: false,
     },
     total_shares: {

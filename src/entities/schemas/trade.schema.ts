@@ -35,7 +35,7 @@ Trade.init(
       allowNull: false,
     },
     type: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(4),
       allowNull: false,
     },
     shares: {
@@ -43,7 +43,7 @@ Trade.init(
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT(2),
       allowNull: false,
     },
     createdAt: {
