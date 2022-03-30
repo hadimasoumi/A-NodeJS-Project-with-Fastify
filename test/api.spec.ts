@@ -1,5 +1,7 @@
 import fs from "fs";
-import app from "../src/app";
+import { app } from "../src/server";
+
+const domain = app.app_domain + ":" + app.app_port;
 
 const dir = "./test/data/";
 const testFolder = "./test/data";
@@ -60,16 +62,17 @@ describe("Check Tests", () => {
       console.log(`Running ${test} \n\n`);
 
       for (const eve of requests) {
-        let response;
+        // console.log("eve ---> ", eve);
 
+        let response;
         switch (eve.request.method) {
           case "DELETE":
-            response = await chai.request(app).delete(eve.request.url);
+            response = await chai.request(domain).delete(eve.request.url);
             expect(response.status).toEqual(eve.response.status_code);
             break;
 
           case "GET":
-            response = await chai.request(app).delete(eve.request.url);
+            response = await chai.request(domain).get(eve.request.url);
             expect(response.statusCode).toEqual(eve.response.status_code);
             let ar1 = response.body;
             let ar2 = eve.response.body;
@@ -86,7 +89,7 @@ describe("Check Tests", () => {
 
           case "POST":
             response = await chai
-              .request(app)
+              .request(domain)
               .post(eve.request.url)
               .set(eve.request.headers)
               .send(eve.request.body);
