@@ -1,5 +1,5 @@
-import models from "../entities/schemas";
-import { UserInterface } from "../entities/interfaces/user.interface";
+import models from "../core/entities/schemas";
+import { UserInterface } from "../core/entities/interfaces/user.interface";
 
 class UserRepository {
   private static instance: UserRepository;

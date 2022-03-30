@@ -3,7 +3,7 @@ import StockRepository from "../repositories/stock.repository";
 import {
   StockUpdatePriceInterface,
   StockCreateInterface,
-} from "../entities/interfaces/stock.interface";
+} from "../core/entities/interfaces/stock.interface";
 
 async function findAllStocks() {
   const tradeRepository = StockRepository.getInstance();

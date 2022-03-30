@@ -6,7 +6,7 @@
     "prestart": "npm install",
     "pretest": "tsc -p .",
     "clean": "rimraf dist",
-    "start:dev": "SET NODE_ENV=1 && nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
+    "start:dev": "SET NODE_ENV=1 && nodemon --watch 'src/**/*.ts' --exec ts-node src/app/server.ts",
     "start:production": "SET NODE_ENV=2 && node build/server.js",
     "start:staging": "SET NODE_ENV=staging && node build/server.js",
     "build": "tsc --listEmittedFiles ",

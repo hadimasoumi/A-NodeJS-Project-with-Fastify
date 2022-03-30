@@ -1,5 +1,5 @@
 import fs from "fs";
-import { app } from "../src/server";
+import { app } from "../src/app/server";
 
 const domain = app.app_domain + ":" + app.app_port;
 

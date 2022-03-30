@@ -1,8 +1,8 @@
-import models from "../entities/schemas";
+import models from "../core/entities/schemas";
 import {
   StockUpdatePriceInterface,
   StockCreateInterface,
-} from "../entities/interfaces/stock.interface";
+} from "../core/entities/interfaces/stock.interface";
 
 class StockRepository {
   private static instance: StockRepository;

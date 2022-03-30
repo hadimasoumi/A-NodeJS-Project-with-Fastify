@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import UserController from "../controllers/user.controller";
-import responseHandler from "../helper/response.handler";
-import { UserInterface } from "../entities/interfaces/user.interface";
+import responseHandler from "../core/helper/response.handler";
+import { UserInterface } from "../core/entities/interfaces/user.interface";
 import userController from "../controllers/user.controller";
 
 class TradeRoutes {

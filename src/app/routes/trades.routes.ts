@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import TradeController from "../controllers/trade.controller";
-import responseHandler from "../helper/response.handler";
-import { TradeCreateRequestInterface } from "../entities/interfaces/trade.interface";
+import responseHandler from "../core/helper/response.handler";
+import { TradeCreateRequestInterface } from "../core/entities/interfaces/trade.interface";
 
 class TradeRoutes {
   public prefix_route = "/trades";

@@ -1,6 +1,6 @@
 import StockHistoryRepository from "../repositories/stockHistory.repository";
 
-import { StockHistoryCreateInterface } from "../entities/interfaces/stockHistory.interface";
+import { StockHistoryCreateInterface } from "../core/entities/interfaces/stockHistory.interface";
 
 async function findAllStockHistory(symbol: string) {
   const stockHistoryRepository = StockHistoryRepository.getInstance();

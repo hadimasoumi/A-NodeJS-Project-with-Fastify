@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import stockController from "../controllers/stock.controller";
 import stockHistoryController from "../controllers/stockHistory.controller";
-import responseHandler from "../helper/response.handler";
-import { StockCreateInterface } from "../entities/interfaces/stock.interface";
+import responseHandler from "../core/helper/response.handler";
+import { StockCreateInterface } from "../core/entities/interfaces/stock.interface";
 class StockRoutes {
   public prefix_route = "/stocks";
 

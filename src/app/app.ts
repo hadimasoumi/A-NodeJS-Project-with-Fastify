@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
-import config from "./config";
+import config from "../env";
 // import MongoAdapter from "./adapters/mongo.adapter";
-import "./adapters/mariadb.adapter";
+import "./core/adapters/mariadb.adapter";
 
 class App {
   public app: FastifyInstance;

@@ -3,13 +3,13 @@ import {
   TradeCreateRequestInterface,
   TradeCreateDBInterface,
   TradeGetResponseInterface,
-} from "../entities/interfaces/trade.interface";
-import { StockInterface } from "../entities/interfaces/stock.interface";
-import { UserInterface } from "../entities/interfaces/user.interface";
+} from "../core/entities/interfaces/trade.interface";
+import { StockInterface } from "../core/entities/interfaces/stock.interface";
+import { UserInterface } from "../core/entities/interfaces/user.interface";
 import TradeRepository from "../repositories/trade.repository";
-import stockController from "../controllers/stock.controller";
-import stockHistoryController from "../controllers/stockHistory.controller";
-import userController from "../controllers/user.controller";
+import stockController from "./stock.controller";
+import stockHistoryController from "./stockHistory.controller";
+import userController from "./user.controller";
 
 async function findAllTrades() {
   const tradeRepository = TradeRepository.getInstance();

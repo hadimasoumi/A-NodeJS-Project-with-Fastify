@@ -6,7 +6,7 @@ import {
   CreationOptional,
   DataTypes,
 } from "@sequelize/core/types";
-import config from "../config";
+import config from "../../../env";
 
 const username = config.db.mariaDB.username!;
 const password = config.db.mariaDB.password!;

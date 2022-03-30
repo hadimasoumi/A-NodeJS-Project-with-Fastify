@@ -1,6 +1,6 @@
-import models from "../entities/schemas";
-import config from "../config";
-import { TradeCreateDBInterface } from "../entities/interfaces/trade.interface";
+import models from "../core/entities/schemas";
+import config from "../../env";
+import { TradeCreateDBInterface } from "../core/entities/interfaces/trade.interface";
 class TradeRepository {
   private static instance: TradeRepository;
 

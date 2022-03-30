@@ -1,4 +1,0 @@
-imports:
-  - { resource: "development.yml", property: "development" }
-  - { resource: "production.yml", property: "production" }
-  - { resource: "staging.yml", property: "staging" }

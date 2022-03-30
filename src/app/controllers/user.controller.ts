@@ -1,4 +1,4 @@
-import { UserInterface } from "../entities/interfaces/user.interface";
+import { UserInterface } from "../core/entities/interfaces/user.interface";
 import UserRepository from "../repositories/user.repository";
 
 async function createUser(reqCreate: UserInterface) {
