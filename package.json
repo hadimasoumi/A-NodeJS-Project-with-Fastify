@@ -6,9 +6,9 @@
     "prestart": "npm install",
     "pretest": "tsc -p .",
     "clean": "rimraf dist",
-    "start:dev": "SET NODE_ENV=1 && nodemon --watch 'src/**/*.ts' --exec ts-node src/app/server.ts",
-    "start:production": "SET NODE_ENV=2 && node build/app/server.js",
-    "start:staging": "SET NODE_ENV=staging && node build/app/server.js",
+    "start:dev": "NODE_ENV=1 && nodemon --watch 'src/**/*.ts' --exec ts-node src/app/server.ts",
+    "start:production": "NODE_ENV=2 && node build/app/server.js",
+    "start:staging": "NODE_ENV=staging && node build/app/server.js",
     "build": "tsc --listEmittedFiles ",
     "test": "jest test"
   },
