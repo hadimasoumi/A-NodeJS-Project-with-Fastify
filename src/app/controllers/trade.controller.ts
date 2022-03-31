@@ -47,9 +47,10 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
         throw new Error(`400 : Record already exists`);
       }
     }
-    const stock: StockInterface = await stockController.getStockBySymbol(
-      reqCreate.symbol
-    );
+    const stock: StockInterface = await stockController.createStockIfNotExists({
+      symbol: reqCreate.symbol,
+    });
+    console.log("stock ---> ", stock);
     const user = await userController.getUserById(reqCreate.user.id);
     if (user.length == 0) {
       await userController.createUser(reqCreate.user);
@@ -58,7 +59,7 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
     let reqCreateDB: TradeCreateDBInterface = {
       id: reqCreate.id,
       user_id: reqCreate.user.id,
-      stock_id: stock[0].id,
+      stock_id: stock.id,
       price: reqCreate.price,
       shares: reqCreate.shares,
       type: reqCreate.type,
@@ -88,6 +89,7 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
           });
       })
       .catch((error) => {
+        console.log("error in tradeHandler -> createTrade ---> ", error);
         throw new Error("400 : " + error);
       });
   } else {

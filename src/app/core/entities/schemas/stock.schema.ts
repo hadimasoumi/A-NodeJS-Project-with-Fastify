@@ -26,20 +26,20 @@ Stock.init(
     },
     name: {
       type: DataTypes.STRING(50),
-      allowNull: false,
-      unique: true,
+      allowNull: true,
     },
     price: {
       type: DataTypes.FLOAT(2),
-      allowNull: false,
+      allowNull: true,
+      defaultValue: 0,
     },
     total_shares: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     updatedAt: {
       type: DataTypes.DATE,

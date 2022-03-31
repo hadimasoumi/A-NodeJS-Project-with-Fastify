@@ -1,10 +1,22 @@
 import StockHistoryRepository from "../repositories/stockHistory.repository";
+import StockController from "./stock.controller";
 
 import { StockHistoryCreateInterface } from "../core/entities/interfaces/stockHistory.interface";
 
-async function findAllStockHistory(symbol: string) {
+async function findAllStockHistoryBySymbol(symbol: string) {
   const stockHistoryRepository = StockHistoryRepository.getInstance();
-  return await stockHistoryRepository.findAllStockHistory(symbol);
+
+  return StockController.getStockBySymbol(symbol)
+    .then((stock) => {
+      console.log("stock ---> ", stock);
+      if (stock.length > 0) {
+        console.log("stock ---> ", stock);
+        return stockHistoryRepository.findAllStockHistoryByStockId(stock[0].id);
+      } else return [];
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 
 async function createStockHistory(reqCreate: StockHistoryCreateInterface) {
@@ -17,6 +29,6 @@ async function createStockHistory(reqCreate: StockHistoryCreateInterface) {
 }
 
 export default {
-  findAllStockHistory,
+  findAllStockHistoryBySymbol,
   createStockHistory,
 };

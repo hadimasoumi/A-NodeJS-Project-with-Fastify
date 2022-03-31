@@ -10,10 +10,11 @@ interface StockUpdatePriceInterface {
   readonly price: number;
 }
 interface StockCreateInterface {
+  id?: number;
   symbol: string;
-  name: string;
-  price: number;
-  total_shares: number;
+  name?: string;
+  price?: number;
+  total_shares?: number;
 }
 
 export { StockInterface, StockUpdatePriceInterface, StockCreateInterface };

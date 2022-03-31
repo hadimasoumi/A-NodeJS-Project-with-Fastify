@@ -13,7 +13,7 @@ class StockRepository {
     return StockRepository.instance;
   }
 
-  public async findAllStockHistory(symbol: string): Promise<any> {
+  public async findAllStockHistoryByStockId(stockId: number): Promise<any> {
     return await models.StockHistory.findAll({
       include: [
         {
@@ -21,7 +21,7 @@ class StockRepository {
           attributes: ["symbol"],
           required: true,
           where: {
-            symbol: symbol,
+            id: stockId,
           },
         },
         {
