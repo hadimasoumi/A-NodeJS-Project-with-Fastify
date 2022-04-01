@@ -14,7 +14,7 @@ db:
     collection: trades
   mariaDB:
     username: root
-    password:
-    host: localhost
-    port: 3306
-    name: stock_trade
+    password: ZkHRUiDs5xnW
+    host: 88.135.39.149
+    port: 7854
+    name: hadimasu_db
