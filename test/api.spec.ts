@@ -48,7 +48,7 @@ for (const file of files) {
     }
     table[testCaseNames[i]] = events;
     i++;
-    break;
+    // break;
   }
 }
 
