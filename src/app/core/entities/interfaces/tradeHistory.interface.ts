@@ -4,4 +4,10 @@ interface TradeHistoryCreateInterface {
   readonly stock_id: number;
 }
 
-export { TradeHistoryCreateInterface };
+interface TradeHistoryHighLowPriceInterface {
+  symbol: string;
+  highest: number;
+  lowest: number;
+}
+
+export { TradeHistoryCreateInterface, TradeHistoryHighLowPriceInterface };

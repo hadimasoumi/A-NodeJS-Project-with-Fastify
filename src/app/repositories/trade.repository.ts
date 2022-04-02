@@ -44,7 +44,7 @@ class TradeRepository {
     };
 
     if (trade.id != undefined) object["id"] = trade.id;
-    console.log("object ---> ", object);
+    // console.log("object ---> ", object);
     return models.Trade.create(object);
   }
 

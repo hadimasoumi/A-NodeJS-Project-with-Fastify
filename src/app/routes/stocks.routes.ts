@@ -23,7 +23,7 @@ class StockRoutes {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
         const symbol = params["Symbol"];
-        const data = await stockHistoryController.findAllStockHistoryBySymbol(
+        const data = await stockHistoryController.findAllTradeHistoryBySymbol(
           symbol
         );
         return data;
@@ -38,13 +38,13 @@ class StockRoutes {
           start: string;
           end: string;
         };
-        console.log(" queryParams ---> ", queryParams);
         const symbol = params["Symbol"];
-        const data = await stockHistoryController.findAllStockHistoryBySymbol(
-          symbol,
-          queryParams.start,
-          queryParams.end
-        );
+        const data =
+          await stockHistoryController.getHightLowPriceTradeHistoryBySymbol(
+            symbol,
+            queryParams.start,
+            queryParams.end
+          );
         return data;
       }, reply);
       await reply;

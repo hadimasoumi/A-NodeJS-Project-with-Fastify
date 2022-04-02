@@ -71,7 +71,6 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
     const stock: StockInterface = await stockController.createStockIfNotExists({
       symbol: reqCreate.symbol,
     });
-    console.log("stock ---> ", stock);
     const user = await userController.getUserById(reqCreate.user.id);
     if (user.length == 0) {
       await userController.createUser(reqCreate.user);

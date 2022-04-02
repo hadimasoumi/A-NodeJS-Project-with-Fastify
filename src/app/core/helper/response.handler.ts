@@ -7,14 +7,19 @@ export const responseSender = async (
   data: ResponseInterface,
   reply: FastifyReply
 ): Promise<void> => {
-  console.log("data >> ", data);
-  if ("success" in data) {
-    reply
-      .header("Content-Type", "application/json;charset=utf-8")
-      .code(data.success.code);
-  } else {
-    await errorHandler.reply(data, reply);
-  }
+  // console.log("data >> ", data);
+  if (data) {
+    if ("success" in data) {
+      reply
+        .header("Content-Type", "application/json;charset=utf-8")
+        .code(data.success.code);
+    } else {
+      await errorHandler.reply(data, reply);
+    }
+  } else
+    throw new Error(
+      "500 : error ocuured in response.handler. data is not in correct way"
+    );
   reply.send(data);
 };
 
