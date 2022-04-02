@@ -44,11 +44,14 @@ async function createUser(reqCreate: UserInterface) {
 
 async function getUserById(UserID: number) {
   const userRepository = UserRepository.getInstance();
-  try {
-    return await userRepository.getUserById(UserID);
-  } catch (err) {
-    throw new Error(`400 : Save data is not successfully`);
-  }
+  return userRepository
+    .getUserById(UserID)
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      throw new Error("400 : " + error.toString());
+    });
 }
 export default {
   deleteAllUsers,

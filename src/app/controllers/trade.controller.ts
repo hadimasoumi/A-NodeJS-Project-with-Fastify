@@ -122,10 +122,19 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
 
 async function getTradeByUserId(UserID: number) {
   const tradeRepository = TradeRepository.getInstance();
-  try {
-    return await tradeRepository.getTradeByUserId(UserID);
-  } catch (err) {
-    throw new Error(`400 : Save data is not successfully`);
+
+  const user = await userController.getUserById(UserID);
+  if (user.length > 0) {
+    tradeRepository
+      .getTradeByUserId(UserID)
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  } else {
+    throw new Error("404 : user does not exist");
   }
 }
 
