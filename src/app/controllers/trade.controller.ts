@@ -8,8 +8,29 @@ import { StockInterface } from "../core/entities/interfaces/stock.interface";
 import { UserInterface } from "../core/entities/interfaces/user.interface";
 import TradeRepository from "../repositories/trade.repository";
 import stockController from "./stock.controller";
-import stockHistoryController from "./stockHistory.controller";
+import TradeHistoryController from "./tradeHistory.controller";
 import userController from "./user.controller";
+
+async function eraseTrades() {
+  const tradeRepository = TradeRepository.getInstance();
+
+  return TradeHistoryController.deleteAllTradeHistory().then(() => {
+    return tradeRepository
+      .deleteAllTrades()
+      .then(async () => {
+        await Promise.all([
+          stockController.deleteAllStocks(),
+          userController.deleteAllUsers(),
+        ]);
+      })
+      .then(() => {
+        return `200 : trades was erased successfully`;
+      })
+      .catch((error) => {
+        `400 : Delete data is not successfully, don't have data in Database`;
+      });
+  });
+}
 
 async function findAllTrades() {
   const tradeRepository = TradeRepository.getInstance();
@@ -79,7 +100,7 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
             price: reqCreate.price,
           })
           .then(() => {
-            stockHistoryController.createStockHistory({
+            TradeHistoryController.createTradeHistory({
               stock_id: reqCreateDB.stock_id,
               price: reqCreate.price,
               trade_id: result.dataValues.id,
@@ -105,19 +126,6 @@ async function getTradeByUserId(UserID: number) {
     return await tradeRepository.getTradeByUserId(UserID);
   } catch (err) {
     throw new Error(`400 : Save data is not successfully`);
-  }
-}
-
-async function eraseTrades(): Promise<string> {
-  const tradeRepository = TradeRepository.getInstance();
-  const deleteResult = await tradeRepository.eraseTrades();
-  console.log("deleteResult ---> ", deleteResult);
-  if (deleteResult) {
-    return `200 : trades was erased successfully`;
-  } else {
-    throw new Error(
-      `400 : Delete data is not successfully, don't have data in Database`
-    );
   }
 }
 

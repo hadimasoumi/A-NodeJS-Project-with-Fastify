@@ -2,7 +2,7 @@ import { CreationOptional, Model, DataTypes } from "@sequelize/core";
 import sequelize from "../../adapters/sequelizeORM";
 
 // ───────────────────────────────────────────────────────────────── Schema ─────
-class StockHistory extends Model {
+class TradeHistory extends Model {
   declare id: CreationOptional<number>;
   declare symbol: string;
   declare price: number;
@@ -12,7 +12,7 @@ class StockHistory extends Model {
   declare updatedAt: CreationOptional<Date>;
 }
 
-StockHistory.init(
+TradeHistory.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -36,9 +36,9 @@ StockHistory.init(
     },
   },
   {
-    tableName: "stocks_histories",
+    tableName: "trades_histories",
     sequelize,
   }
 );
 
-export default StockHistory;
+export default TradeHistory;

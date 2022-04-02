@@ -5,6 +5,19 @@ import {
   StockCreateInterface,
 } from "../core/entities/interfaces/stock.interface";
 
+async function deleteAllStocks(): Promise<any> {
+  const tradeRepository = StockRepository.getInstance();
+  tradeRepository
+    .deleteAllStocks()
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log("error in StockConroller -> deleteAllStocks >> ", error);
+      throw new Error("400 : " + error.toString());
+    });
+}
+
 async function findAllStocks() {
   const tradeRepository = StockRepository.getInstance();
   return await tradeRepository.findAllStocks();
@@ -53,6 +66,7 @@ async function upsertStock(reqCreate: StockCreateInterface) {
 }
 
 async function createStockIfNotExists(reqCreate: StockCreateInterface) {
+  if (reqCreate.symbol == "AAV") console.log("re >> ", reqCreate);
   const stockRepository = StockRepository.getInstance();
   return stockRepository
     .createStockIfNotExists(reqCreate)
@@ -69,6 +83,7 @@ async function createStockIfNotExists(reqCreate: StockCreateInterface) {
 }
 
 export default {
+  deleteAllStocks,
   findAllStocks,
   updateStock,
   getStockBySymbol,

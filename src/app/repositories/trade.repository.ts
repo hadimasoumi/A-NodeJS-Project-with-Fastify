@@ -1,5 +1,4 @@
 import models from "../core/entities/schemas";
-import config from "../../env";
 import { TradeCreateDBInterface } from "../core/entities/interfaces/trade.interface";
 class TradeRepository {
   private static instance: TradeRepository;
@@ -76,14 +75,11 @@ class TradeRepository {
     });
   }
 
-  public async eraseTrades(): Promise<any> {
+  public async deleteAllTrades(): Promise<any> {
     const res = await models.Trade.destroy({
-      // returning: true,
-      // checkExistance: true,
       where: {},
       force: true,
     });
-    console.log("res ---> ", res);
     return true;
   }
 }

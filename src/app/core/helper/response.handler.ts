@@ -7,6 +7,7 @@ export const responseSender = async (
   data: ResponseInterface,
   reply: FastifyReply
 ): Promise<void> => {
+  console.log("data >> ", data);
   if ("success" in data) {
     reply
       .header("Content-Type", "application/json;charset=utf-8")

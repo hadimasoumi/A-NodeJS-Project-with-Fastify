@@ -13,6 +13,13 @@ class UserRepository {
     return UserRepository.instance;
   }
 
+  public async deleteAllUsers(): Promise<any> {
+    return models.User.destroy({
+      where: {},
+      force: true,
+    });
+  }
+
   public async findAllUsers(): Promise<any> {
     const result = await models.Trade.findAll({
       order: [["id", "ASC"]],

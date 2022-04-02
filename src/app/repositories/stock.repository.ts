@@ -16,6 +16,13 @@ class StockRepository {
     return StockRepository.instance;
   }
 
+  public async deleteAllStocks(): Promise<any> {
+    return models.Stock.destroy({
+      where: {},
+      force: true,
+    });
+  }
+
   public async findAllStocks(): Promise<any> {
     return await models.Stock.findAll();
   }
@@ -48,10 +55,15 @@ class StockRepository {
   }
 
   public async createStock(stock): Promise<any> {
-    try {
-      const result = await models.Stock.create(stock);
-      return result;
-    } catch (error) {}
+    if (stock.symbol == "AAV") console.log("stock33333 >> ");
+    return models.Stock.create(stock)
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        console.log("error in stockRepository -> createStock ---> ", error);
+        throw new Error(error);
+      });
   }
   public async upsertStock(stock): Promise<any> {
     try {

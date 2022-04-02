@@ -1,6 +1,19 @@
 import { UserInterface } from "../core/entities/interfaces/user.interface";
 import UserRepository from "../repositories/user.repository";
 
+async function deleteAllUsers(): Promise<any> {
+  const userRepository = UserRepository.getInstance();
+  userRepository
+    .deleteAllUsers()
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log("error in userConroller -> deleteAllUsers >> ", error);
+      throw new Error("400 : " + error.toString());
+    });
+}
+
 async function createUser(reqCreate: UserInterface) {
   const userRepository = UserRepository.getInstance();
   let finalresult: any;
@@ -38,6 +51,7 @@ async function getUserById(UserID: number) {
   }
 }
 export default {
+  deleteAllUsers,
   createUser,
   getUserById,
 };

@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import stockController from "../controllers/stock.controller";
-import stockHistoryController from "../controllers/stockHistory.controller";
+import stockHistoryController from "../controllers/tradeHistory.controller";
 import responseHandler from "../core/helper/response.handler";
 import { StockCreateInterface } from "../core/entities/interfaces/stock.interface";
 class StockRoutes {
@@ -31,14 +31,21 @@ class StockRoutes {
       await reply;
     });
 
-    fastify.get(`/:Symbol/price`, async (request, reply) => {
+    fastify.get(`/:Symbol/price/`, async (request, reply) => {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
-        const queryParams = request.query;
+        const queryParams = request.query as {
+          start: string;
+          end: string;
+        };
         console.log(" queryParams ---> ", queryParams);
         const symbol = params["Symbol"];
-        // const data = await stockHistoryController.findAllStockHistory(symbol);
-        return true;
+        const data = await stockHistoryController.findAllStockHistoryBySymbol(
+          symbol,
+          queryParams.start,
+          queryParams.end
+        );
+        return data;
       }, reply);
       await reply;
     });
