@@ -55,6 +55,33 @@ async function findAllTrades() {
       throw new Error(`400 : in getAllTrades ` + error);
     });
 }
+async function findTradesBySymbol(
+  symbol: string,
+  startDate?: string,
+  endDate?: string
+) {
+  const tradeRepository = TradeRepository.getInstance();
+  return tradeRepository
+    .findTradesBySymbol(symbol, startDate, endDate)
+    .then((trades) => {
+      let res: TradeGetResponseInterface[] = [];
+      for (const trade of trades) {
+        res.push({
+          id: trade.id,
+          type: trade.type,
+          symbol: trade.Stock.symbol,
+          shares: trade.shares,
+          price: trade.price,
+          timestamp: moment(trade.createdAt).format("yyyy-MM-DD HH:mm:ss"),
+          user: trade.User,
+        });
+      }
+      return res;
+    })
+    .catch((error) => {
+      throw new Error(`400 : in getAllTrades ` + error);
+    });
+}
 
 async function createTrade(reqCreate: TradeCreateRequestInterface) {
   const tradeRepository = TradeRepository.getInstance();
@@ -123,10 +150,19 @@ async function getTradeByUserId(UserID: number) {
   const tradeRepository = TradeRepository.getInstance();
 
   const user = await userController.getUserById(UserID);
-  if (user.length > 0) {
-    tradeRepository
+  if (user?.length > 0) {
+    return tradeRepository
       .getTradeByUserId(UserID)
-      .then((result) => {
+      .then((trade) => {
+        let result: TradeGetResponseInterface = {
+          id: trade[0].id,
+          symbol: trade[0].Stock?.symbol,
+          type: trade[0].type,
+          shares: trade[0].shares,
+          price: trade[0].price,
+          timestamp: moment(trade[0].createdAt).format("yyyy-MM-DD HH:mm:ss"),
+          user: trade[0].User,
+        };
         return result;
       })
       .catch((error) => {
@@ -142,4 +178,5 @@ export default {
   createTrade,
   getTradeByUserId,
   eraseTrades,
+  findTradesBySymbol,
 };

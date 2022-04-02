@@ -19,7 +19,18 @@ class StockRoutes {
       await reply;
     });
 
-    fastify.get(`/:Symbol`, async (request, reply) => {
+    fastify.post(`/`, async (request, reply) => {
+      responseHandler(async () => {
+        const reqCreate: StockCreateInterface =
+          request.body as StockCreateInterface;
+        console.log(reqCreate);
+        const data = await stockController.createStock(reqCreate);
+        return data;
+      }, reply);
+      await reply;
+    });
+
+    fastify.get(`/history/:Symbol`, async (request, reply) => {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
         const symbol = params["Symbol"];
@@ -50,12 +61,33 @@ class StockRoutes {
       await reply;
     });
 
-    fastify.post(`/`, async (request, reply) => {
+    fastify.get(`/stats`, async (request, reply) => {
       responseHandler(async () => {
-        const reqCreate: StockCreateInterface =
-          request.body as StockCreateInterface;
-        console.log(reqCreate);
-        const data = await stockController.createStock(reqCreate);
+        const queryParams = request.query as {
+          start: string;
+          end: string;
+        };
+        const data = await stockHistoryController.getStocksStats(
+          queryParams.start,
+          queryParams.end
+        );
+        return data;
+      }, reply);
+      await reply;
+    });
+
+    fastify.get(`/stats/:symbol`, async (request, reply) => {
+      responseHandler(async () => {
+        const params = request.params as { symbol: string };
+        const queryParams = request.query as {
+          start: string;
+          end: string;
+        };
+        const data = await stockHistoryController.getStockStatsBySymbol(
+          params.symbol,
+          queryParams.start,
+          queryParams.end
+        );
         return data;
       }, reply);
       await reply;

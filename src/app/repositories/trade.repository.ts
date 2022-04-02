@@ -1,3 +1,5 @@
+import { Op } from "@sequelize/core";
+import MOMENT from "moment";
 import models from "../core/entities/schemas";
 import { TradeCreateDBInterface } from "../core/entities/interfaces/trade.interface";
 class TradeRepository {
@@ -32,6 +34,48 @@ class TradeRepository {
     // as TradeInterface[];
   }
 
+  public async findTradesBySymbol(
+    symbol,
+    startDate?: string,
+    endDate?: string
+  ): Promise<any> {
+    let whereClause = {};
+    if (startDate && endDate) {
+      whereClause["createdAt"] = {
+        [Op.between]: [
+          startDate
+            ? MOMENT(startDate).format("YYYY-MM-DD")
+            : MOMENT().format("YYYY-MM-DD"),
+          endDate
+            ? MOMENT(endDate).format("YYYY-MM-DD")
+            : MOMENT().format("YYYY-MM-DD"),
+        ],
+      };
+    }
+
+    const result = await models.Trade.findAll({
+      include: [
+        {
+          model: models.User,
+          attributes: ["id", "name"],
+          required: true,
+        },
+        {
+          model: models.Stock,
+          attributes: ["symbol"],
+          required: true,
+          where: {
+            symbol: symbol,
+          },
+        },
+      ],
+      order: [["id", "ASC"]],
+      where: whereClause,
+    });
+    return result;
+    // as TradeInterface[];
+  }
+
   public createTrade(trade: TradeCreateDBInterface): Promise<any> {
     const object = {
       type: trade.type,
@@ -44,7 +88,6 @@ class TradeRepository {
     };
 
     if (trade.id != undefined) object["id"] = trade.id;
-    // console.log("object ---> ", object);
     return models.Trade.create(object);
   }
 
@@ -52,6 +95,11 @@ class TradeRepository {
     try {
       const result = await models.Trade.findAll({
         include: [
+          {
+            model: models.Stock,
+            attributes: ["symbol"],
+            required: true,
+          },
           {
             model: models.User,
             attributes: ["id", "name"],

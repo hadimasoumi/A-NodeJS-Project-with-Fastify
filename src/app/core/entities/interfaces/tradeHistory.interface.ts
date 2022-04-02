@@ -10,4 +10,17 @@ interface TradeHistoryHighLowPriceInterface {
   lowest: number;
 }
 
-export { TradeHistoryCreateInterface, TradeHistoryHighLowPriceInterface };
+interface TradeHistoryStatsInterface {
+  stock: string;
+  fluctuations?: number;
+  max_rise?: number;
+  max_fall?: number;
+  message?: string;
+  prices?: Array<number>;
+}
+
+export {
+  TradeHistoryCreateInterface,
+  TradeHistoryHighLowPriceInterface,
+  TradeHistoryStatsInterface,
+};

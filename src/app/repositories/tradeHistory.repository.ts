@@ -49,6 +49,7 @@ class TradeHistoryRepository {
           where: {
             id: stockId,
           },
+          order: [["symbol", "ASC"]],
         },
         {
           model: models.Trade,

@@ -20,6 +20,24 @@ class TradeRoutes {
       await reply;
     });
 
+    fastify.get(`/:symbol`, async (request, reply) => {
+      const params = request.params as { symbol: string };
+      const queryParams = request.query as {
+        start: string;
+        end: string;
+      };
+      responseHandler(async () => {
+        const data = await TradeController.findTradesBySymbol(
+          params.symbol,
+          queryParams.start,
+          queryParams.end
+        );
+
+        return data;
+      }, reply);
+      await reply;
+    });
+
     fastify.post(`/`, async (request, reply) => {
       responseHandler(
         async () => {
