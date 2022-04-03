@@ -8,7 +8,9 @@ require("../entities/schemas");
 sequelizeORM_1.default
     .sync({ force: false })
     .then(() => {
+    console.log("MariaDB has connected 🎉");
 })
     .catch((err) => {
+    console.log("**** error [MariaDB] : ", err);
 });
 //# sourceMappingURL=mariadb.adapter.js.map

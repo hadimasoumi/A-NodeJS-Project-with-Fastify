@@ -1,5 +1,5 @@
 import { CreationOptional, Model, DataTypes } from "@sequelize/core";
-import sequelize from "../../../core/adapters/sequelizeORM";
+import sequelize from "../../adapters/sequelizeORM";
 
 // ───────────────────────────────────────────────────────────────── Schema ─────
 class Stock extends Model {
