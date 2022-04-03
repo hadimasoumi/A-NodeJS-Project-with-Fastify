@@ -8,7 +8,7 @@
   matSortDirection="desc"
 >
   <!-- -------------------------------- date --------------------------------- -->
-  <ng-container matColumnDef="ID">
+  <ng-container matColumnDef="id">
     <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
     <td mat-cell *matCellDef="let element" class="">
       {{ element.id }}
@@ -22,17 +22,29 @@
     </td>
   </ng-container> -->
 
-  <ng-container matColumnDef="Symbol">
+  <ng-container matColumnDef="symbol">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
     <td mat-cell *matCellDef="let element" class="">
       {{ element.symbol }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="Price">
+  <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
     <td mat-cell *matCellDef="let element" class="">
       {{ element.price }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="highest">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>highest</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.highest }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="lowest">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>lowest</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.lowest }}
     </td>
   </ng-container>
 

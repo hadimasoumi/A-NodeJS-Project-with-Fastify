@@ -27,13 +27,7 @@ export class StocksComponent implements OnInit, OnChanges {
   pageIndex = 0;
   pageSizeOptions: number[] = [50, 75, 100, 125, 150];
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = [
-    "ID",
-    // "Name",
-    "Symbol",
-    "Price",
-    // "TotalShares"
-  ];
+  displayedColumns: string[] = ["id", "symbol", "price", "highest", "lowest"];
   @ViewChild(MatSort, { static: true }) newSort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 

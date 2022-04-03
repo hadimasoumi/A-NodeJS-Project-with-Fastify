@@ -1,11 +1,4 @@
 const Sequelize = require("@sequelize/core");
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-  DataTypes,
-} from "@sequelize/core/types";
 import config from "../../../env";
 
 const username = config.db.mariaDB.username!;

@@ -38,8 +38,8 @@ import "../entities/schemas";
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log("MariaDB has connected 🎉");
+    // console.log("MariaDB has connected 🎉");
   })
   .catch((err) => {
-    console.log("**** error [MariaDB] : ", err);
+    // console.log("**** error [MariaDB] : ", err);
   });

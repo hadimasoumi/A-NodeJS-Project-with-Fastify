@@ -1,10 +1,11 @@
 import StockRepository from "../repositories/stock.repository";
-
+import tradeHistoryController from "./tradeHistory.controller";
 import {
   StockUpdatePriceInterface,
   StockCreateInterface,
+  StockHighLowInterface,
 } from "../core/entities/interfaces/stock.interface";
-
+import { TradeHistoryHighLowPriceInterface } from "../core/entities/interfaces/tradeHistory.interface";
 async function deleteAllStocks(): Promise<any> {
   const tradeRepository = StockRepository.getInstance();
   tradeRepository
@@ -20,7 +21,30 @@ async function deleteAllStocks(): Promise<any> {
 
 async function findAllStocks() {
   const tradeRepository = StockRepository.getInstance();
-  return await tradeRepository.findAllStocks();
+  let result: Array<StockHighLowInterface> = [];
+  return tradeRepository
+    .findAllStocks()
+    .then(async (stocks) => {
+      for (const stock of stocks) {
+        const highlow: TradeHistoryHighLowPriceInterface =
+          await tradeHistoryController.getHightLowPriceTradeHistoryBySymbol(
+            stock.symbol
+          );
+        const response: StockHighLowInterface = {
+          id: stock.id,
+          symbol: stock.symbol,
+          price: stock.price,
+          highest: highlow.highest,
+          lowest: highlow.lowest,
+        };
+        result.push(response);
+      }
+      return result;
+    })
+    .catch((error) => {
+      console.log("error in stockController -> findAllStocks ---> ", error);
+      throw new Error(error);
+    });
 }
 
 async function updateStock(reqUpdate: StockUpdatePriceInterface) {

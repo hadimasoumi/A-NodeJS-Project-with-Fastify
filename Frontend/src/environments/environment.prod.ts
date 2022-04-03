@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  hostname: "https://demo.savyjs.com/",
+  hostname: "http://condo-api.hadi-masoumi.ir",
 };

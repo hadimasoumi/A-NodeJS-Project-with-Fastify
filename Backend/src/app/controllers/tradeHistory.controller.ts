@@ -1,4 +1,7 @@
-import { StockInterface } from "../core/entities/interfaces/stock.interface";
+import {
+  StockInterface,
+  StockHighLowInterface,
+} from "../core/entities/interfaces/stock.interface";
 import TradeHistoryRepository from "../repositories/tradeHistory.repository";
 import StockController from "./stock.controller";
 import TradeController from "./trade.controller";
@@ -92,73 +95,43 @@ async function getStockStatsBySymbol(
   startDate?: string,
   endDate?: string
 ) {
-  const tradeHistoryRepository = TradeHistoryRepository.getInstance();
-
-  return StockController.getStockBySymbol(symbol)
-    .then(async (stock) => {
-      console.log("stock >> ", stock);
-      let response: TradeHistoryStatsInterface = { stock: stock[0].symbol };
-      const trades = await TradeController.findTradesBySymbol(
-        stock[0].symbol,
-        startDate,
-        endDate
-      );
-
+  let response: TradeHistoryStatsInterface = { stock: symbol };
+  return TradeController.findTradesBySymbol(symbol, startDate, endDate)
+    .then(async (trades) => {
+      console.log("trades.length >> ", trades.length);
       if (trades.length == 0) {
         response.message = "There are no trades in the given date range";
       } else {
-        // if (trades.length < 3) {
-        //   response.fluctuations = 0;
-        //   response.max_rise = 0.0;
-        //   response.max_fall = 0.0;
-        // } else {
         const prices = trades.map((x) => x.price);
-        // console.log("prices >> ", prices);
         const stats = await detectStockFluctuation(prices);
-        console.log("stats >> ", stats);
         response.fluctuations = stats?.fluctuations;
         response.max_rise = stats?.max_rise;
         response.max_fall = stats?.max_fall;
         response.prices = prices;
-        // }
       }
       console.log("response >> ", response);
 
       return response;
     })
-    .catch((error) => {});
+    .catch((error) => {
+      console.log("error >> ", error);
+    });
 }
 async function getStocksStats(
   startDate?: string,
   endDate?: string
 ): Promise<any> {
-  const tradeHistoryRepository = TradeHistoryRepository.getInstance();
-
   let result: Array<TradeHistoryStatsInterface> = [];
 
   try {
-    const stocks: StockInterface[] = await StockController.findAllStocks();
+    const stocks: StockHighLowInterface[] =
+      await StockController.findAllStocks();
     for (const stock of stocks) {
-      let response: TradeHistoryStatsInterface = { stock: stock.symbol };
-      const trades = await tradeHistoryRepository.findAllTradeHistoryByStockId(
-        stock.id
-      );
-
-      if (trades.length == 0) {
-        response.message = "There are no trades in the given date range";
-        result.push(response);
-      } else {
-        if (trades.length < 3) {
-          response.fluctuations = 0;
-          response.max_rise = 0.0;
-          response.max_fall = 0.0;
-        } else {
-          const prices = trades.map((x) => x.price);
-          console.log("prices >> ", prices);
-          return detectStockFluctuation(prices);
-        }
-      }
-      console.log("response >> ", response);
+      const response: TradeHistoryStatsInterface = (await getStockStatsBySymbol(
+        stock.symbol,
+        startDate,
+        endDate
+      )) as TradeHistoryStatsInterface;
       result.push(response);
     }
     return result;
@@ -172,22 +145,6 @@ async function getStocksStats(
 }
 
 function detectStockFluctuation(prices: Array<number>) {
-  // if (prices.length >= 3) {
-  const first = prices[0];
-  const end = prices[prices.length - 1];
-  // const max = Math.max(...prices);
-  // const maxIndex = prices.indexOf(max);
-  // const min = Math.min(...prices);
-  // const minIndex = prices.indexOf(min);
-
-  // if (maxIndex > minIndex) {
-  //   result.max_rise = max;
-  //   if ( max > prices[prices.length - 1] ) {
-  //     result.fluctuations
-  //   } else {
-  //   }
-  // } else {
-  // }
   const fluctuation: Array<number> = [];
   let rises: Array<number> = [];
   let falls: Array<number> = [];

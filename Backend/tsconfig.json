@@ -26,7 +26,8 @@
     "lib": ["es2018", "DOM"],
     "rootDirs": ["src", "src/test"],
     "outDir": "build",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": ["jest"]
   },
   "exclude": ["node_modules", "build"],
   "include": ["src/*.ts", "src/**/*.ts"]
