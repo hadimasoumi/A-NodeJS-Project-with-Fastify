@@ -11,11 +11,6 @@ class StockRoutes {
     options: FastifyPluginOptions,
     done: any
   ) {
-    fastify.register(require("fastify-cors"), {
-      origin: "*",
-      methods: ["POST"],
-    });
-
     fastify.get(`/`, async (request, reply) => {
       responseHandler(async () => {
         const data = await stockController.findAllStocks();
