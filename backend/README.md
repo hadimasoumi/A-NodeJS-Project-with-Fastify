@@ -6,6 +6,7 @@ This is the Backend section of the trial project. It is developed using Nodejs/F
 
 - Node.js
 - Git
+- PHPMyAdmin (MariaDB/MySQL2)
 - NPM (optional)
 
 ## Available Scripts
