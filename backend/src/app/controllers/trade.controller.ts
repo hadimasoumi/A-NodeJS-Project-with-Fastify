@@ -149,23 +149,44 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
 async function getTradeByUserId(UserID: number) {
   const tradeRepository = TradeRepository.getInstance();
 
-  const user = await userController.getUserById(UserID);
+  const user = await userController
+    .getUserById(UserID)
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log(
+        "erro occured in TradeCountroller -> getTradeByUserId >> ",
+        error
+      );
+      throw new Error(error);
+    });
   if (user?.length > 0) {
     return tradeRepository
       .getTradeByUserId(UserID)
-      .then((trade) => {
-        let result: TradeGetResponseInterface = {
-          id: trade[0].id,
-          symbol: trade[0].Stock?.symbol,
-          type: trade[0].type,
-          shares: trade[0].shares,
-          price: trade[0].price,
-          timestamp: moment(trade[0].createdAt).format("yyyy-MM-DD HH:mm:ss"),
-          user: trade[0].User,
-        };
-        return result;
+      .then((trades) => {
+        if (trades.length > 0) {
+          let result: Array<TradeGetResponseInterface> = [];
+
+          for (const trade of trades) {
+            result.push({
+              id: trade.id,
+              symbol: trade.Stock?.symbol,
+              type: trade.type,
+              shares: trade.shares,
+              price: trade.price,
+              timestamp: moment(trade.createdAt).format("yyyy-MM-DD HH:mm:ss"),
+              user: trade.User,
+            });
+          }
+          return result;
+        } else return [];
       })
       .catch((error) => {
+        console.log(
+          "erro occured in TradeCountroller -> getTradeByUserId >> ",
+          error
+        );
         throw new Error(error);
       });
   } else {
