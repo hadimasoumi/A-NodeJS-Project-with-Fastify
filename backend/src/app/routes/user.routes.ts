@@ -2,7 +2,6 @@ import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import UserController from "../controllers/user.controller";
 import responseHandler from "../core/helper/response.handler";
 import { UserInterface } from "../core/entities/interfaces/user.interface";
-import userController from "../controllers/user.controller";
 
 class TradeRoutes {
   public prefix_route = "/users";
@@ -27,7 +26,7 @@ class TradeRoutes {
           const reqCreate: UserInterface = request.body as UserInterface;
           console.log(reqCreate);
 
-          const data = await userController.createUser(reqCreate);
+          const data = await UserController.CreateUser(reqCreate);
           return data;
         },
         reply,

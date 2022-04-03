@@ -13,14 +13,14 @@ class UserRepository {
     return UserRepository.instance;
   }
 
-  public async deleteAllUsers(): Promise<any> {
+  public async DeleteAllUsers(): Promise<any> {
     return models.User.destroy({
       where: {},
       force: true,
     });
   }
 
-  public async findAllUsers(): Promise<any> {
+  public async GetAllUsers(): Promise<any> {
     const result = await models.Trade.findAll({
       order: [["id", "ASC"]],
     });
@@ -28,7 +28,7 @@ class UserRepository {
     // as TradeInterface[];
   }
 
-  public createUser(user: UserInterface): Promise<any> {
+  public CreateUser(user: UserInterface): Promise<any> {
     const object = {
       name: user.name,
     };
@@ -36,7 +36,7 @@ class UserRepository {
     return models.User.create(object);
   }
 
-  public getUserById(id: number): Promise<any> {
+  public GetUserById(id: number): Promise<any> {
     return models.User.findAll({
       where: {
         id: id,

@@ -1,35 +1,33 @@
 import StockRepository from "../repositories/stock.repository";
-import tradeHistoryController from "./tradeHistory.controller";
+import TradeController from "./trade.controller";
 import {
   StockUpdatePriceInterface,
   StockCreateInterface,
   StockHighLowInterface,
 } from "../core/entities/interfaces/stock.interface";
 import { TradeHistoryHighLowPriceInterface } from "../core/entities/interfaces/tradeHistory.interface";
-async function deleteAllStocks(): Promise<any> {
+async function DeleteAllStocks(): Promise<any> {
   const tradeRepository = StockRepository.getInstance();
   tradeRepository
-    .deleteAllStocks()
+    .DeleteAllStocks()
     .then((result) => {
       return result;
     })
     .catch((error) => {
-      console.log("error in StockConroller -> deleteAllStocks >> ", error);
+      console.log("error in StockConroller -> DeleteAllStocks >> ", error);
       throw new Error("400 : " + error.toString());
     });
 }
 
-async function findAllStocks() {
+async function GetAllStocks() {
   const tradeRepository = StockRepository.getInstance();
   let result: Array<StockHighLowInterface> = [];
   return tradeRepository
-    .findAllStocks()
+    .GetAllStocks()
     .then(async (stocks) => {
       for (const stock of stocks) {
         const highlow: TradeHistoryHighLowPriceInterface =
-          await tradeHistoryController.getHightLowPriceTradeHistoryBySymbol(
-            stock.symbol
-          );
+          await TradeController.GetStockHightLowPriceBySymbol(stock.symbol);
         const response: StockHighLowInterface = {
           id: stock.id,
           symbol: stock.symbol,
@@ -42,44 +40,44 @@ async function findAllStocks() {
       return result;
     })
     .catch((error) => {
-      console.log("error in stockController -> findAllStocks ---> ", error);
+      console.log("error in stockController -> GetAllStocks ---> ", error);
       throw new Error(error);
     });
 }
 
-async function updateStock(reqUpdate: StockUpdatePriceInterface) {
+async function UpdateStock(reqUpdate: StockUpdatePriceInterface) {
   const stockRepository = StockRepository.getInstance();
   try {
-    await stockRepository.updateStock(reqUpdate);
+    await stockRepository.UpdateStock(reqUpdate);
     return `201 : Save data is successfully`;
   } catch (err) {
     throw new Error(`400 : update data is not successfully`);
   }
 }
 
-async function getStockBySymbol(symbol: string) {
+async function GetStockBySymbol(symbol: string) {
   const stockRepository = StockRepository.getInstance();
   try {
-    return await stockRepository.getStockBySymbol(symbol);
+    return await stockRepository.GetStockBySymbol(symbol);
   } catch (err) {
     throw new Error(`400 : Save data is not successfully`);
   }
 }
 
-async function createStock(reqCreate: StockCreateInterface) {
+async function CreateStock(reqCreate: StockCreateInterface) {
   const stockRepository = StockRepository.getInstance();
   try {
-    await stockRepository.createStock(reqCreate);
+    await stockRepository.CreateStock(reqCreate);
     return `201 : Save data is successfully`;
   } catch (err) {
     throw new Error(`400 : update data is not successfully`);
   }
 }
 
-async function upsertStock(reqCreate: StockCreateInterface) {
+async function UpsertStock(reqCreate: StockCreateInterface) {
   const stockRepository = StockRepository.getInstance();
   return stockRepository
-    .upsertStock(reqCreate)
+    .UpsertStock(reqCreate)
     .then((result) => {
       return result;
     })
@@ -89,7 +87,7 @@ async function upsertStock(reqCreate: StockCreateInterface) {
     });
 }
 
-async function createStockIfNotExists(reqCreate: StockCreateInterface) {
+async function CreateStockIfNotExists(reqCreate: StockCreateInterface) {
   if (reqCreate.symbol == "AAV") console.log("re >> ", reqCreate);
   const stockRepository = StockRepository.getInstance();
   return stockRepository
@@ -107,11 +105,11 @@ async function createStockIfNotExists(reqCreate: StockCreateInterface) {
 }
 
 export default {
-  deleteAllStocks,
-  findAllStocks,
-  updateStock,
-  getStockBySymbol,
-  createStock,
-  upsertStock,
-  createStockIfNotExists,
+  DeleteAllStocks,
+  GetAllStocks,
+  UpdateStock,
+  GetStockBySymbol,
+  CreateStock,
+  UpsertStock,
+  CreateStockIfNotExists,
 };

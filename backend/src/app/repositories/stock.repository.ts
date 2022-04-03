@@ -16,18 +16,18 @@ class StockRepository {
     return StockRepository.instance;
   }
 
-  public async deleteAllStocks(): Promise<any> {
+  public async DeleteAllStocks(): Promise<any> {
     return models.Stock.destroy({
       where: {},
       force: true,
     });
   }
 
-  public async findAllStocks(): Promise<any> {
+  public async GetAllStocks(): Promise<any> {
     return await models.Stock.findAll();
   }
 
-  public async updateStock(stock: StockUpdatePriceInterface): Promise<any> {
+  public async UpdateStock(stock: StockUpdatePriceInterface): Promise<any> {
     try {
       const result = await models.Stock.update(
         {
@@ -43,7 +43,7 @@ class StockRepository {
     } catch (error) {}
   }
 
-  public async getStockBySymbol(symbol: string): Promise<any> {
+  public async GetStockBySymbol(symbol: string): Promise<any> {
     try {
       const result = await models.Stock.findAll({
         where: {
@@ -54,7 +54,7 @@ class StockRepository {
     } catch (error) {}
   }
 
-  public async createStock(stock): Promise<any> {
+  public async CreateStock(stock): Promise<any> {
     if (stock.symbol == "AAV") console.log("stock33333 >> ");
     return models.Stock.create(stock)
       .then((result) => {
@@ -65,7 +65,7 @@ class StockRepository {
         throw new Error(error);
       });
   }
-  public async upsertStock(stock): Promise<any> {
+  public async UpsertStock(stock): Promise<any> {
     try {
       const result = await models.Stock.upsert(stock);
       console.log("result ---> ", result);
@@ -77,12 +77,12 @@ class StockRepository {
     const stockRepository = StockRepository.getInstance();
 
     return stockRepository
-      .getStockBySymbol(reqCreate.symbol)
+      .GetStockBySymbol(reqCreate.symbol)
       .then(async (result) => {
         if (result.length > 0) {
           return result[0];
         } else {
-          return this.createStock(reqCreate);
+          return this.CreateStock(reqCreate);
         }
       })
       .catch((error) => {

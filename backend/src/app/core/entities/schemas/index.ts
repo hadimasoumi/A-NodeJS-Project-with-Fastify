@@ -1,7 +1,6 @@
 import Trade from "./trade.schema";
 import User from "./user.schema";
 import Stock from "./stock.schema";
-import TradeHistory from "./tradeHistory.schema";
 
 User.hasMany(Trade, {
   foreignKey: {
@@ -31,27 +30,8 @@ Stock.hasMany(Trade, {
   },
 });
 
-TradeHistory.belongsTo(Trade, {
-  foreignKey: {
-    name: "trade_id",
-    allowNull: false,
-  },
-  onUpdate: "NO ACTION",
-  onDelete: "NO ACTION",
-});
-
-TradeHistory.belongsTo(Stock, {
-  foreignKey: {
-    name: "stock_id",
-    allowNull: false,
-  },
-  onUpdate: "NO ACTION",
-  onDelete: "NO ACTION",
-});
-
 export default {
   Trade,
   User,
   Stock,
-  TradeHistory,
 };

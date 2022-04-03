@@ -1,10 +1,10 @@
 import { UserInterface } from "../core/entities/interfaces/user.interface";
 import UserRepository from "../repositories/user.repository";
 
-async function deleteAllUsers(): Promise<any> {
+async function DeleteAllUsers(): Promise<any> {
   const userRepository = UserRepository.getInstance();
   userRepository
-    .deleteAllUsers()
+    .DeleteAllUsers()
     .then((result) => {
       return result;
     })
@@ -14,21 +14,21 @@ async function deleteAllUsers(): Promise<any> {
     });
 }
 
-async function createUser(reqCreate: UserInterface) {
+async function CreateUser(reqCreate: UserInterface) {
   const userRepository = UserRepository.getInstance();
   let finalresult: any;
 
   // TODO: add validator for reqBody
   if (reqCreate != undefined && reqCreate != null && reqCreate.name) {
     if (reqCreate.id) {
-      const res = await userRepository.getUserById(reqCreate.id);
+      const res = await userRepository.GetUserById(reqCreate.id);
       if (res.length > 0) {
         return `200 : Save data is successfully.`;
       }
     }
 
     await userRepository
-      .createUser(reqCreate)
+      .CreateUser(reqCreate)
       .then(async (result) => {
         finalresult = `201 : Save data is successfully`;
       })
@@ -42,10 +42,10 @@ async function createUser(reqCreate: UserInterface) {
   return finalresult;
 }
 
-async function getUserById(UserID: number) {
+async function GetUserById(UserID: number) {
   const userRepository = UserRepository.getInstance();
   return userRepository
-    .getUserById(UserID)
+    .GetUserById(UserID)
     .then((result) => {
       return result;
     })
@@ -54,7 +54,7 @@ async function getUserById(UserID: number) {
     });
 }
 export default {
-  deleteAllUsers,
-  createUser,
-  getUserById,
+  DeleteAllUsers,
+  CreateUser,
+  GetUserById,
 };

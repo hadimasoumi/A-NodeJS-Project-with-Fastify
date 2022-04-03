@@ -29,8 +29,25 @@ interface TradeCreateDBInterface {
   updatedAt?: string;
 }
 
+interface TradeHistoryHighLowPriceInterface {
+  symbol: string;
+  highest: number;
+  lowest: number;
+}
+
+interface TradeHistoryStatsInterface {
+  stock: string;
+  fluctuations?: number;
+  max_rise?: number;
+  max_fall?: number;
+  message?: string;
+  prices?: Array<number>;
+}
+
 export {
   TradeCreateRequestInterface,
   TradeCreateDBInterface,
   TradeGetResponseInterface,
+  TradeHistoryHighLowPriceInterface,
+  TradeHistoryStatsInterface,
 };

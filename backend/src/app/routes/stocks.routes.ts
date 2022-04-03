@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import stockController from "../controllers/stock.controller";
-import stockHistoryController from "../controllers/tradeHistory.controller";
+import TradeController from "../controllers/trade.controller";
 import responseHandler from "../core/helper/response.handler";
 import { StockCreateInterface } from "../core/entities/interfaces/stock.interface";
 class StockRoutes {
@@ -20,12 +20,11 @@ class StockRoutes {
           end: string;
         };
         const symbol = params["Symbol"];
-        const data =
-          await stockHistoryController.getHightLowPriceTradeHistoryBySymbol(
-            symbol,
-            queryParams.start,
-            queryParams.end
-          );
+        const data = await TradeController.GetStockHightLowPriceBySymbol(
+          symbol,
+          queryParams.start,
+          queryParams.end
+        );
         return data;
       }, reply);
       await reply;
@@ -38,7 +37,7 @@ class StockRoutes {
           start: string;
           end: string;
         };
-        const data = await stockHistoryController.getStocksStats(
+        const data = await TradeController.GetStocksStats(
           queryParams.start,
           queryParams.end
         );
@@ -55,7 +54,7 @@ class StockRoutes {
           start: string;
           end: string;
         };
-        const data = await stockHistoryController.getStockStatsBySymbol(
+        const data = await TradeController.GetStockStatsBySymbol(
           params.symbol,
           queryParams.start,
           queryParams.end
@@ -68,7 +67,7 @@ class StockRoutes {
     // Get all stocks
     fastify.get(`/`, async (request, reply) => {
       responseHandler(async () => {
-        const data = await stockController.findAllStocks();
+        const data = await stockController.GetAllStocks();
         return data;
       }, reply);
       await reply;
@@ -80,7 +79,7 @@ class StockRoutes {
         const reqCreate: StockCreateInterface =
           request.body as StockCreateInterface;
         console.log(reqCreate);
-        const data = await stockController.createStock(reqCreate);
+        const data = await stockController.CreateStock(reqCreate);
         return data;
       }, reply);
       await reply;

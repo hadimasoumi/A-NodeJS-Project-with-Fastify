@@ -14,7 +14,7 @@ class TradeRepository {
     return TradeRepository.instance;
   }
 
-  public async findAllTrades(): Promise<any> {
+  public async GetAllTrades(): Promise<any> {
     const result = await models.Trade.findAll({
       include: [
         {
@@ -34,7 +34,7 @@ class TradeRepository {
     // as TradeInterface[];
   }
 
-  public async findTradesBySymbol(
+  public async GetTradesBySymbol(
     symbol,
     startDate?: string,
     endDate?: string
@@ -76,7 +76,7 @@ class TradeRepository {
     // as TradeInterface[];
   }
 
-  public createTrade(trade: TradeCreateDBInterface): Promise<any> {
+  public CreateTrade(trade: TradeCreateDBInterface): Promise<any> {
     const object = {
       type: trade.type,
       user_id: trade.user_id,
@@ -91,7 +91,7 @@ class TradeRepository {
     return models.Trade.create(object);
   }
 
-  public async getTradeByUserId(id: number): Promise<any> {
+  public async GetTradesByUserId(id: number): Promise<any> {
     try {
       const result = await models.Trade.findAll({
         include: [
@@ -115,7 +115,7 @@ class TradeRepository {
     } catch (error) {}
   }
 
-  public getTradeById(id: number): Promise<any> {
+  public GetTradeById(id: number): Promise<any> {
     return models.Trade.findAll({
       where: {
         id: id,
@@ -123,12 +123,46 @@ class TradeRepository {
     });
   }
 
-  public async deleteAllTrades(): Promise<any> {
-    const res = await models.Trade.destroy({
+  public DeleteAllTrades(): Promise<any> {
+    return models.Trade.destroy({
       where: {},
       force: true,
     });
-    return true;
+  }
+
+  public async GetTradesByStockId(
+    stockId: number,
+    startDate?: string,
+    endDate?: string
+  ): Promise<any> {
+    let whereClause = {};
+    if (startDate && endDate) {
+      whereClause["createdAt"] = {
+        [Op.between]: [
+          startDate
+            ? MOMENT(startDate).format("YYYY-MM-DD")
+            : MOMENT().format("YYYY-MM-DD"),
+          endDate
+            ? MOMENT(endDate).format("YYYY-MM-DD")
+            : MOMENT().format("YYYY-MM-DD HH:mm:ss"),
+        ],
+      };
+    }
+    return await models.Trade.findAll({
+      attributes: ["price", "shares", "createdAt"],
+      include: [
+        {
+          model: models.Stock,
+          attributes: ["symbol"],
+          required: true,
+          where: {
+            id: stockId,
+          },
+          order: [["symbol", "ASC"]],
+        },
+      ],
+      where: whereClause,
+    });
   }
 }
 

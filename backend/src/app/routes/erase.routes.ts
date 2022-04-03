@@ -12,7 +12,7 @@ class EraseRoutes {
   ) {
     fastify.delete(`/`, async (request, reply) => {
       responseHandler(async () => {
-        const data = await TradeController.EraseTrades();
+        const data = await TradeController.DeleteAllTrades();
 
         return data;
       }, reply);
