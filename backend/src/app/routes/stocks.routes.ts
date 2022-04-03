@@ -11,37 +11,7 @@ class StockRoutes {
     options: FastifyPluginOptions,
     done: any
   ) {
-    fastify.get(`/`, async (request, reply) => {
-      responseHandler(async () => {
-        const data = await stockController.findAllStocks();
-        return data;
-      }, reply);
-      await reply;
-    });
-
-    fastify.post(`/`, async (request, reply) => {
-      responseHandler(async () => {
-        const reqCreate: StockCreateInterface =
-          request.body as StockCreateInterface;
-        console.log(reqCreate);
-        const data = await stockController.createStock(reqCreate);
-        return data;
-      }, reply);
-      await reply;
-    });
-
-    fastify.get(`/history/:Symbol`, async (request, reply) => {
-      responseHandler(async () => {
-        const params = request.params as { symbol: string };
-        const symbol = params["Symbol"];
-        const data = await stockHistoryController.findAllTradeHistoryBySymbol(
-          symbol
-        );
-        return data;
-      }, reply);
-      await reply;
-    });
-
+    // Get highest and lowest price by symbol
     fastify.get(`/:Symbol/price/`, async (request, reply) => {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
@@ -61,6 +31,7 @@ class StockRoutes {
       await reply;
     });
 
+    // Get stats of all stocks
     fastify.get(`/stats`, async (request, reply) => {
       responseHandler(async () => {
         const queryParams = request.query as {
@@ -76,6 +47,7 @@ class StockRoutes {
       await reply;
     });
 
+    // Get stats by symbol
     fastify.get(`/stats/:symbol`, async (request, reply) => {
       responseHandler(async () => {
         const params = request.params as { symbol: string };
@@ -93,6 +65,26 @@ class StockRoutes {
       await reply;
     });
 
+    // Get all stocks
+    fastify.get(`/`, async (request, reply) => {
+      responseHandler(async () => {
+        const data = await stockController.findAllStocks();
+        return data;
+      }, reply);
+      await reply;
+    });
+
+    // Create new stock
+    fastify.post(`/`, async (request, reply) => {
+      responseHandler(async () => {
+        const reqCreate: StockCreateInterface =
+          request.body as StockCreateInterface;
+        console.log(reqCreate);
+        const data = await stockController.createStock(reqCreate);
+        return data;
+      }, reply);
+      await reply;
+    });
     done();
   }
 }

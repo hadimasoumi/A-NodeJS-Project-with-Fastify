@@ -11,7 +11,7 @@ import stockController from "./stock.controller";
 import TradeHistoryController from "./tradeHistory.controller";
 import userController from "./user.controller";
 
-async function eraseTrades() {
+async function EraseTrades() {
   const tradeRepository = TradeRepository.getInstance();
 
   return TradeHistoryController.deleteAllTradeHistory().then(() => {
@@ -27,12 +27,12 @@ async function eraseTrades() {
         return `200 : trades was erased successfully`;
       })
       .catch((error) => {
-        `400 : Delete data is not successfully, don't have data in Database`;
+        `400 : Deleting operation was not successfully`;
       });
   });
 }
 
-async function findAllTrades() {
+async function GetAllTrades() {
   const tradeRepository = TradeRepository.getInstance();
   return tradeRepository
     .findAllTrades()
@@ -52,10 +52,10 @@ async function findAllTrades() {
       return res;
     })
     .catch((error) => {
-      throw new Error(`400 : in getAllTrades ` + error);
+      throw new Error(`400 : in GetAllTrades ` + error);
     });
 }
-async function findTradesBySymbol(
+async function GetTradesBySymbol(
   symbol: string,
   startDate?: string,
   endDate?: string
@@ -79,11 +79,11 @@ async function findTradesBySymbol(
       return res;
     })
     .catch((error) => {
-      throw new Error(`400 : in getAllTrades ` + error);
+      throw new Error(`400 : in GetTradesBySymbol ` + error.toString());
     });
 }
 
-async function createTrade(reqCreate: TradeCreateRequestInterface) {
+async function CreateTrade(reqCreate: TradeCreateRequestInterface) {
   const tradeRepository = TradeRepository.getInstance();
   let finalresult: any;
 
@@ -146,7 +146,7 @@ async function createTrade(reqCreate: TradeCreateRequestInterface) {
   return finalresult;
 }
 
-async function getTradeByUserId(UserID: number) {
+async function GetTradesByUserId(UserID: number) {
   const tradeRepository = TradeRepository.getInstance();
 
   const user = await userController
@@ -184,7 +184,7 @@ async function getTradeByUserId(UserID: number) {
       })
       .catch((error) => {
         console.log(
-          "erro occured in TradeCountroller -> getTradeByUserId >> ",
+          "erro occured in TradeCountroller -> GetTradesByUserId >> ",
           error
         );
         throw new Error(error);
@@ -195,9 +195,9 @@ async function getTradeByUserId(UserID: number) {
 }
 
 export default {
-  findAllTrades,
-  createTrade,
-  getTradeByUserId,
-  eraseTrades,
-  findTradesBySymbol,
+  GetAllTrades,
+  CreateTrade,
+  GetTradesByUserId,
+  EraseTrades,
+  GetTradesBySymbol,
 };

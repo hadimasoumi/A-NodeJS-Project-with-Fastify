@@ -4,6 +4,7 @@ import responseHandler from "../core/helper/response.handler";
 class EraseRoutes {
   public prefix_route = "/erase";
 
+  // Delete all trades
   async routes(
     fastify: FastifyInstance,
     options: FastifyPluginOptions,
@@ -11,7 +12,7 @@ class EraseRoutes {
   ) {
     fastify.delete(`/`, async (request, reply) => {
       responseHandler(async () => {
-        const data = await TradeController.eraseTrades();
+        const data = await TradeController.EraseTrades();
 
         return data;
       }, reply);

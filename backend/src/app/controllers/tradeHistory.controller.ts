@@ -96,7 +96,7 @@ async function getStockStatsBySymbol(
   endDate?: string
 ) {
   let response: TradeHistoryStatsInterface = { stock: symbol };
-  return TradeController.findTradesBySymbol(symbol, startDate, endDate)
+  return TradeController.GetTradesBySymbol(symbol, startDate, endDate)
     .then(async (trades) => {
       console.log("trades.length >> ", trades.length);
       if (trades.length == 0) {
