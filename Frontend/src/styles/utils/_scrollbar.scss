@@ -1,0 +1,23 @@
+// scrollbar
+*::-webkit-scrollbar {
+  width: 0.6em;
+}
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $primary;
+  outline: 1px solid grey;
+}
+-webkit-scrollbar {
+  width: 0.6em;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+  outline: 1px solid grey;
+}

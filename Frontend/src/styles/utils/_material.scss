@@ -1,0 +1,204 @@
+.mat-button,
+.mat-calendar,
+.mat-checkbox,
+.mat-fab,
+.mat-flat-button,
+.mat-form-field,
+.mat-icon-button,
+.mat-menu-item,
+.mat-mini-fab,
+.mat-option,
+.mat-radio-button,
+.mat-raised-button,
+.mat-select,
+.mat-simple-snackbar,
+.mat-slide-toggle-content,
+.mat-stroked-button,
+.mat-tab-group,
+.mat-tab-label,
+.mat-tab-link,
+.mat-tooltip,
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger,
+.mat-table,
+.mat-list-base,
+.mat-subheader,
+.mat-toolbar,
+.mat-expansion-panel-header,
+.mat-expansion-panel,
+.mat-expansion-panel-content,
+.mat-expansion-panel-header-description,
+.mat-slider-thumb-label-text input {
+  // font-family: $primary_font_family;
+  direction: ltr !important;
+}
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  // font-family: $primary_font_family;
+}
+
+.mat-simple-snackbar {
+  text-align: right;
+  color: #fff;
+}
+
+.mat-snack-bar-container {
+  // background: $primary !important;
+  text-align: center;
+}
+
+.mat-simple-snackbar {
+  display: inline-block !important;
+}
+
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.form-control,
+button {
+  // border-radius: 0 !important;
+  direction: ltr !important;
+}
+
+.mat-icon-button {
+  border-radius: 50% !important;
+}
+.mat-radio-label-content {
+  padding-top: 1px;
+}
+
+.primary-mat-dialog-container {
+  .mat-dialog-container {
+    background: $white;
+  }
+}
+
+.cls-1,
+.cls-2 {
+  fill: none;
+  stroke-linecap: bevel;
+  stroke-linejoin: round;
+}
+.cls-1 {
+  stroke: $grey;
+  stroke-width: 2px;
+}
+.cls-2 {
+  stroke: $success;
+  stroke-width: 4px;
+}
+.table-container {
+  overflow: auto;
+}
+
+.mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+.mat-input-element {
+  border: 1px solid #ced4da !important;
+}
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+mat-dialog-container.mat-dialog-container {
+  padding: 0;
+}
+.mat-datepicker-content {
+  margin: 0 !important;
+}
+.mat-datepicker-content-touch {
+  margin: 0 !important;
+}
+.mat-checkbox-inner-container {
+  margin: 0 !important;
+}
+
+.mat-tab-label-container {
+  .mat-ripple {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    // background-color: #c5c9cf;
+    font-weight: bold !important;
+    font-size: 12px;
+    margin: 0 1px;
+  }
+
+  .mat-tab-label-active {
+    font-weight: bold !important;
+    opacity: 1 !important;
+
+    .mat-tab-label-content {
+      z-index: 2;
+      font-size: 15px;
+    }
+  }
+}
+
+.custom-tab .mat-tab-label-container {
+  .mat-tab-label-active {
+    background-color: #1b5e20 !important;
+
+    .mat-tab-label-content {
+      color: white !important;
+    }
+  }
+}
+
+.mat-error {
+  text-align: right !important;
+  font-size: 10px !important;
+}
+
+.mat-form-field-infix {
+  text-align: right !important;
+  border-bottom: 1px solid grey;
+}
+
+.mat-form-field {
+  input[type="tel"] {
+    &.input-value.mat-input-element {
+      text-align: left !important;
+      direction: ltr !important;
+    }
+  }
+}
+
+.mat-input-element {
+  border: none !important;
+}
+
+.cdk-overlay-container {
+  .mat-menu-panel {
+    max-width: fit-content !important;
+    overflow-x: hidden;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+}
+.mat-tab-label-container {
+  .mat-ripple {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #e2e9be;
+    font-weight: bold !important;
+    font-size: 12px;
+    margin: 0 1px;
+  }
+
+  .mat-tab-label-active {
+    font-weight: bold !important;
+    opacity: 1 !important;
+
+    .mat-tab-label-content {
+      z-index: 2;
+      font-size: 15px;
+    }
+  }
+}

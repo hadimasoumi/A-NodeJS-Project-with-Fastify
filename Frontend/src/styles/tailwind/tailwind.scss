@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-primary {
+    @apply w-full rounded-lg border border-gray-300 p-3  text-sm font-light text-gray-900 text-gray-900 focus:border-blue-500 focus:border-blue-500 focus:ring-cyan-200 focus:ring-cyan-200 dark:border-gray-600 dark:border-gray-600 dark:text-white dark:text-white dark:placeholder-gray-400 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:ring-blue-500;
+  }
+  .btn-primary {
+    @apply rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800;
+  }
+  .btn-primary-outlined {
+    @apply rounded-lg border border-red-600 px-5 py-2.5 text-center text-sm font-medium text-primary dark:hover:bg-red-700 dark:focus:ring-red-800;
+  }
+
+  .btn-gray-outlined {
+    @apply rounded-lg border border-gray-400 px-5 py-2.5 text-center text-sm font-medium text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-800;
+  }
+
+  .card-primary {
+    @apply rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:p-6;
+  }
+  .badge-primary {
+    @apply rounded bg-gray-400 px-1.5 py-0.5 text-xs font-bold font-semibold text-white dark:bg-gray-700 dark:text-gray-300;
+  }
+  .active .badge-primary {
+    @apply bg-primary;
+  }
+  .text-link {
+    @apply text-secondary;
+  }
+  .text-warning {
+    @apply text-orange-400;
+  }
+  .tabs-primary {
+    @apply flex
+  }
+  .tabs-primary li {
+    @apply sm:grow lg:grow-0
+  }
+  .tabs-primary button {
+    @apply inline-block w-full font-semibold text-sm rounded-t-lg border-b-2 border-transparent py-4 px-4 text-center text-gray-500;
+  }
+  [role='tab'].active {
+    @apply border-b-red-600 font-extrabold border-b-4 rounded-r border-r-4 border-r-transparent  rounded-l border-l-4 border-l-transparent text-red-600 hover:border-red-600 hover:border-t-transparent hover:border-l-transparent hover:border-r-transparent hover:text-red-600;
+  }
+}
+
+@layer utilities {
+  .filter-none {
+    filter: none;
+  }
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+}
