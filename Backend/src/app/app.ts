@@ -27,6 +27,7 @@ class App {
 
   constructor(appInit: { plugins: any; routes: any }) {
     this.app = fastify({ logger: true });
+
     // this.connectMongo();
     // this.connectMariaDB();
     this.routes(appInit.routes);
