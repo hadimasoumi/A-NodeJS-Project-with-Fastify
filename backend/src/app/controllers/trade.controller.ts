@@ -29,7 +29,8 @@ async function DeleteAllTrades() {
       return `200 : trades was erased successfully`;
     })
     .catch((error) => {
-      `400 : Deleting operation was not successfully`;
+      console.log("error >> ", error);
+      throw new Error(`400 : Deleting operation was not successfully`);
     });
 }
 

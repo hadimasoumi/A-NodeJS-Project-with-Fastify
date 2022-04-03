@@ -5,7 +5,7 @@ import {
   StockCreateInterface,
   StockHighLowInterface,
 } from "../core/entities/interfaces/stock.interface";
-import { TradeHistoryHighLowPriceInterface } from "../core/entities/interfaces/tradeHistory.interface";
+
 async function DeleteAllStocks(): Promise<any> {
   const tradeRepository = StockRepository.getInstance();
   tradeRepository
@@ -26,8 +26,9 @@ async function GetAllStocks() {
     .GetAllStocks()
     .then(async (stocks) => {
       for (const stock of stocks) {
-        const highlow: TradeHistoryHighLowPriceInterface =
-          await TradeController.GetStockHightLowPriceBySymbol(stock.symbol);
+        const highlow = await TradeController.GetStockHightLowPriceBySymbol(
+          stock.symbol
+        );
         const response: StockHighLowInterface = {
           id: stock.id,
           symbol: stock.symbol,
