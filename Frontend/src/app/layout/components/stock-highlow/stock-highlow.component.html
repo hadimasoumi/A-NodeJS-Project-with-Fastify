@@ -52,62 +52,33 @@
   matSortActive="ID"
   matSortDirection="desc"
 >
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-    <td mat-cell *matCellDef="let element" class="">
-      {{ element.id }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-    <td mat-cell *matCellDef="let element" class="">
-      {{ element.type }}
-    </td>
-  </ng-container>
-
   <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+    <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>
+      Symbol
+    </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.symbol }}
+      {{ element.time }}
     </td>
   </ng-container>
-  <ng-container matColumnDef="shares">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Shares</th>
+
+  <ng-container matColumnDef="highest">
+    <th width="20%" mat-header-cell *matHeaderCellDef mat-sort-header>
+      Highest
+    </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.shares }}
+      {{ element.time }}
     </td>
   </ng-container>
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+
+  <ng-container matColumnDef="lowest">
+    <th width="20%" mat-header-cell *matHeaderCellDef mat-sort-header>
+      Lowest
+    </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.price }}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="timestamp">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>timestamp</th>
-    <td mat-cell *matCellDef="let element" class="">
-      {{ element.timestamp }}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="user">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-    <td mat-cell *matCellDef="let element" class="">
-      {{ element.user?.name }}
+      {{ element.time }}
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<div class="float-left">
-  <mat-paginator
-    #paginator
-    [length]="trades.length"
-    [(pageIndex)]="pageIndex"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="LimitTrades($event)"
-    showFirstLastButtons
-  ></mat-paginator>
-</div>

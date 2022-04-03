@@ -1,5 +1,4 @@
 .mat-button,
-.mat-calendar,
 .mat-checkbox,
 .mat-fab,
 .mat-flat-button,
@@ -101,9 +100,9 @@ button {
   display: flex;
   justify-content: center;
 }
-.mat-input-element {
-  border: 1px solid #ced4da !important;
-}
+// .mat-input-element {
+//   border: 1px solid #ced4da !important;
+// }
 .mat-drawer-inner-container {
   overflow: hidden !important;
 }
@@ -156,11 +155,6 @@ mat-dialog-container.mat-dialog-container {
   font-size: 10px !important;
 }
 
-.mat-form-field-infix {
-  text-align: right !important;
-  border-bottom: 1px solid grey;
-}
-
 .mat-form-field {
   input[type="tel"] {
     &.input-value.mat-input-element {
@@ -201,4 +195,16 @@ mat-dialog-container.mat-dialog-container {
       font-size: 15px;
     }
   }
+}
+
+mat-calendar {
+  th,
+  td {
+    border: none !important;
+    text-align: center !important;
+  }
+}
+
+.mat-sort-header-content {
+  display: inline-block !important;
 }

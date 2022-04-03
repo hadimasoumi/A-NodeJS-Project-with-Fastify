@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { StockApiService } from "../shared/api/stock-api.service";
 
 @Component({
   selector: "app-layout",
@@ -6,9 +7,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  stocksList = [];
+  constructor(private stockApi: StockApiService) {}
 
   ngOnInit(): void {}
 
-  tabChanged(event) {}
+  async tabChanged(event) {
+    console.log("event >> ", event);
+    if (event.index == 0) {
+    } else if (event.index == 1) {
+    } else if (event.index == 2) {
+    } else if (event.index == 3) {
+      this.stocksList = await this.stockApi.GetStockList();
+    } else if (event.index == 4) {
+    }
+  }
 }

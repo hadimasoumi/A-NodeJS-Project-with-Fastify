@@ -27,10 +27,8 @@ export class HttpService {
     method: "get" | "post" | "put" | "delete" = "get",
     payload,
     url: string,
-    success = false,
-    cache = null,
-    action?,
-    spinner = true
+    queryParams = {},
+    cache = null
   ) {
     let headers: any = {
       "Content-Type": "application/json; charset=utf-8",
@@ -39,55 +37,19 @@ export class HttpService {
       ...headers,
     };
 
-    if (spinner) {
-      headers = {
-        ...headers,
-        spinner: "true",
-      };
-    }
-
-    /* -------------------------------------------------------------------------- */
-    /*                                    cache                                   */
-    /* -------------------------------------------------------------------------- */
-
-    // disable cache system for development mode
-    // if (!environment.production) {
-    //   cache = null;
-    // }
-    // check if there's cache or not
     const isCached = this.customStorageService.getCache(cache);
     if (
       isCached == undefined ||
       isCached == null ||
       (isCached && isCached["data"] == null)
     ) {
-      // Set backend URL
-      // const Url_app =
-      //   window.location.origin == environment.hostname
-      //     ? environment.hostname
-      //     : environment.hostnameExternal;
       const Url_app = environment.hostname;
-
-      // console.log('Url_app :', Url_app);
-
-      /* -------------------------------------------------------------------------- */
-      /*                                   request                                  */
-      /* -------------------------------------------------------------------------- */
-
-      // create request
-
-      let params = {};
-      if (method == "get") {
-        const timeStamp = new Date();
-        params["_timeStamp"] = timeStamp.getTime();
-      }
-
       return (
         this.http
           .request(method, Url_app + url, {
             body: payload,
             headers: new HttpHeaders(headers),
-            params,
+            params: queryParams,
           })
           // .pipe(retry(2))
           .toPromise()
@@ -104,9 +66,7 @@ export class HttpService {
                 result,
               }
             );
-            if (success) {
-              this.notification.openSuccess("با موفقیت ثبت گردید");
-            }
+
             return result;
           })
           .catch((err) => {

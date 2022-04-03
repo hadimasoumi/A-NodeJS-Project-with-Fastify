@@ -1,1 +1,48 @@
-<p>stocks works!</p>
+<table
+  class="text-center xtable w-full"
+  #mytable
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  matSortActive="ID"
+  matSortDirection="desc"
+>
+  <!-- -------------------------------- date --------------------------------- -->
+  <ng-container matColumnDef="ID">
+    <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.id }}
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.name }}
+    </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="Symbol">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.symbol }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.price }}
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="TotalShares">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Shares</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element.total_shares }}
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
