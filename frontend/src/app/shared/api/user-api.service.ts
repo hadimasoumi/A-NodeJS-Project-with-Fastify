@@ -10,27 +10,11 @@ export class UserApiService {
     public notificationService: NotificationService
   ) {}
 
-  public GetStockList() {
+  public GetUserList() {
     return this.httpService.requestCreator(
       "get", // method
       undefined, // payload
       "/users" // url
-    );
-  }
-  public getStockStats() {
-    return this.httpService.requestCreator(
-      "get", // method
-      undefined, // payload
-      "/getStockStats" // url
-    );
-  }
-
-  public getStockPrice(symbol, queryParams) {
-    return this.httpService.requestCreator(
-      "get", // method
-      undefined, // payload
-      "/stocks/" + symbol + "/price/", // url
-      queryParams
     );
   }
 }

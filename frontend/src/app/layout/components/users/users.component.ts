@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -15,7 +16,7 @@ import { MatTableDataSource } from "@angular/material/table";
   styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit {
-  users = [];
+  @Input() users = [];
   endpage = 50;
   step = 50;
   usersOriginal;

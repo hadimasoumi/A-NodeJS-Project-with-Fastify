@@ -19,13 +19,13 @@ import { StockApiService } from "src/app/shared/api/stock-api.service";
 })
 export class StocksComponent implements OnInit, OnChanges {
   @Input() stocks = [];
-  endpage = 50;
-  step = 50;
+  endpage = 10;
+  step = 10;
   stocksOriginal;
   pageEvent: PageEvent;
-  pageSize = 50;
+  pageSize = 10;
   pageIndex = 0;
-  pageSizeOptions: number[] = [50, 75, 100, 125, 150];
+  pageSizeOptions: number[] = [10, 20, 40, 60, 80];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ["id", "symbol", "price", "highest", "lowest"];
   @ViewChild(MatSort, { static: true }) newSort: MatSort;

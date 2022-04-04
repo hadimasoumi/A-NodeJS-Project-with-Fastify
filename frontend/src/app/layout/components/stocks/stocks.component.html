@@ -58,3 +58,14 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+<div class="float-left">
+  <mat-paginator
+    #paginator
+    [length]="stocks.length"
+    [(pageIndex)]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="Limitstocks($event)"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
