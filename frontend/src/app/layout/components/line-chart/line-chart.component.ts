@@ -33,8 +33,8 @@ export class LineChartComponent implements OnInit {
       plugins: {
         title: {
           display: false,
-          text: "Monthly Sales Data",
         },
+        tooltip: {},
       },
     };
   }

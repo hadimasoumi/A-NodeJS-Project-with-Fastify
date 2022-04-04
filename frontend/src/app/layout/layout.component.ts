@@ -9,6 +9,7 @@ import { UserApiService } from "../shared/api/user-api.service";
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
+  statList = [];
   stocksList = [];
   tradesList = [];
   userList = [];
@@ -19,13 +20,14 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.stocksList = await this.stockApi.GetStockList();
+    this.statList = await this.stockApi.getStockStats();
   }
 
   async tabChanged(event) {
     if (event.index == 0) {
-      this.stocksList = await this.stockApi.GetStockList();
+      this.statList = await this.stockApi.getStockStats();
     } else if (event.index == 1) {
+      this.stocksList = await this.stockApi.GetStockList();
     } else if (event.index == 2) {
       this.tradesList = await this.tradeApi.GetTradesList();
     } else if (event.index == 3) {

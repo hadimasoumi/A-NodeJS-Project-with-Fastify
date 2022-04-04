@@ -6,13 +6,14 @@
 >
   <div class="curvy border border-gray-200 min-h-[500px]">
     <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+      <mat-tab class="primary-color small" label="Stocks Stats">
+        <app-stock-stats [stats]="statList"></app-stock-stats>
+      </mat-tab>
+
       <mat-tab class="primary-color small" label="Stocks List">
         <app-stocks [stocks]="stocksList"></app-stocks
       ></mat-tab>
 
-      <mat-tab class="primary-color small" label="Stocks Stats">
-        <app-stock-stats></app-stock-stats>
-      </mat-tab>
       <!-- <mat-tab class="primary-color small" label="Stocks HighLow">
         <app-stock-highlow></app-stock-highlow
       ></mat-tab> -->

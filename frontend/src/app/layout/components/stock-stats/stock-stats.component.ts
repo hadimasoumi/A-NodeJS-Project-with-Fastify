@@ -1,6 +1,8 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
+  OnChanges,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -21,8 +23,8 @@ interface queryParams {
   templateUrl: "./stock-stats.component.html",
   styleUrls: ["./stock-stats.component.scss"],
 })
-export class StockStatsComponent implements OnInit {
-  stats = [];
+export class StockStatsComponent implements OnInit, OnChanges {
+  @Input() stats = [];
   endpage = 10;
   step = 10;
   statsOriginal;
@@ -37,7 +39,7 @@ export class StockStatsComponent implements OnInit {
     "max_rise",
     "max_fall",
     "chart",
-    "message",
+    // "message",
   ];
   @ViewChild(MatSort, { static: true }) newSort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -56,14 +58,7 @@ export class StockStatsComponent implements OnInit {
       end_date: [],
     });
 
-    for (const stat of this.stats) {
-      stat["labels"] = [];
-      for (const price of stat?.prices) {
-        stat["labels"].push("");
-      }
-    }
-
-    this.statsOriginal = [...this.stats];
+    console.log("this.stats >> ", this.stats);
   }
 
   async search() {
@@ -96,7 +91,15 @@ export class StockStatsComponent implements OnInit {
     // console.log('changes ---> ', changes);
     console.log("changes ---> ", changes);
 
-    if (changes.users) this.generateTable();
+    if (changes.stats) this.generateTable();
+    for (const stat of this.stats) {
+      stat["labels"] = [];
+      for (const price of stat?.prices) {
+        stat["labels"].push("");
+      }
+    }
+
+    this.statsOriginal = [...this.stats];
   }
 
   /* ------------------------------- LimitOrders ------------------------------ */
