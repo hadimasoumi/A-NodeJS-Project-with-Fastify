@@ -17,6 +17,8 @@ import { MatTableDataSource } from "@angular/material/table";
 })
 export class UsersComponent implements OnInit {
   @Input() users = [];
+  @Input() loading;
+
   endpage = 10;
   step = 10;
   usersOriginal;

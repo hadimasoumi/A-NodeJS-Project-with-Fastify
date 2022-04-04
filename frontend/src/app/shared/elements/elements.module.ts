@@ -5,9 +5,10 @@ import { RouterModule } from "@angular/router";
 
 import { MaterialModule } from "../material/material.module";
 import { PipesModule } from "../pipes/pipes.module";
+import { ELoadingComponent } from "./e-loading/e-loading.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [ELoadingComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -16,7 +17,7 @@ import { PipesModule } from "../pipes/pipes.module";
     RouterModule,
     PipesModule,
   ],
-  exports: [],
+  exports: [ELoadingComponent],
   providers: [],
 })
 export class ElementsModule {}

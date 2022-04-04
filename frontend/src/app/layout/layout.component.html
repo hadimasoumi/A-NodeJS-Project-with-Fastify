@@ -5,24 +5,27 @@
   style="padding-top: 20px; background-color: #fff !important"
 >
   <div class="curvy border border-gray-200 min-h-[500px]">
-    <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+    <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event.index)">
       <mat-tab class="primary-color small" label="Stocks Stats">
-        <app-stock-stats [stats]="statList"></app-stock-stats>
+        <app-stock-stats
+          [stats]="statList"
+          [loading]="loading1"
+        ></app-stock-stats>
       </mat-tab>
 
       <mat-tab class="primary-color small" label="Stocks List">
-        <app-stocks [stocks]="stocksList"></app-stocks
+        <app-stocks [stocks]="stocksList" [loading]="loading2"></app-stocks
       ></mat-tab>
 
       <!-- <mat-tab class="primary-color small" label="Stocks HighLow">
         <app-stock-highlow></app-stock-highlow
       ></mat-tab> -->
       <mat-tab class="primary-color small" label="Trades"
-        ><app-trades [trades]="tradesList"></app-trades>
+        ><app-trades [trades]="tradesList" [loading]="loading3"></app-trades>
       </mat-tab>
 
       <mat-tab class="primary-color small" label="Users List">
-        <app-user [users]="userList"></app-user>
+        <app-user [users]="userList" [loading]="loading4"></app-user>
       </mat-tab>
     </mat-tab-group>
   </div>

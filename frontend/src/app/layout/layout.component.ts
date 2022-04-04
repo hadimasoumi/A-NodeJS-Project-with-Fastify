@@ -13,6 +13,11 @@ export class LayoutComponent implements OnInit {
   stocksList = [];
   tradesList = [];
   userList = [];
+
+  loading1;
+  loading2;
+  loading3;
+  loading4;
   constructor(
     private stockApi: StockApiService,
     private tradeApi: tradeApiService,
@@ -20,18 +25,26 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.statList = await this.stockApi.getStockStats();
+    this.tabChanged(0);
   }
 
-  async tabChanged(event) {
-    if (event.index == 0) {
+  async tabChanged(index) {
+    if (index == 0) {
+      this.loading1 = true;
       this.statList = await this.stockApi.getStockStats();
-    } else if (event.index == 1) {
+      this.loading1 = false;
+    } else if (index == 1) {
+      this.loading2 = true;
       this.stocksList = await this.stockApi.GetStockList();
-    } else if (event.index == 2) {
+      this.loading2 = false;
+    } else if (index == 2) {
+      this.loading3 = true;
       this.tradesList = await this.tradeApi.GetTradesList();
-    } else if (event.index == 3) {
+      this.loading3 = false;
+    } else if (index == 3) {
+      this.loading4 = true;
       this.userList = await this.userApi.GetUserList();
+      this.loading4 = false;
     }
   }
 }

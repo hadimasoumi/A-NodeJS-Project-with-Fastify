@@ -44,7 +44,24 @@
   </form>
 </div>
 
+<div class="float-left" [class.d-none]="loading">
+  <mat-paginator
+    #paginator
+    [length]="stats.length"
+    [(pageIndex)]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="LimitStats($event)"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<div *ngIf="loading" class="py-36">
+  <app-e-loading></app-e-loading>
+</div>
+
 <table
+  *ngIf="!loading"
   class="text-center xtable w-full"
   #mytable
   mat-table
@@ -103,13 +120,11 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<div *ngIf="!(stats?.length > 0)">
-  <p class="py-36 text-center">
-    Choose a date range then click on Search Button
-  </p>
+<div *ngIf="stats?.length == 0 && !loading">
+  <p class="py-36 text-center">No result found!</p>
 </div>
 
-<div class="float-left">
+<div class="float-left d-block" [class.d-none]="loading">
   <mat-paginator
     #paginator
     [length]="stats.length"

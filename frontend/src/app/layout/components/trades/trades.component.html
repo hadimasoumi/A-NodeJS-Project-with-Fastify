@@ -44,6 +44,21 @@
   </form>
 </div>
 
+<div class="float-left" [class.d-none]="loading">
+  <mat-paginator
+    #paginator
+    [length]="trades.length"
+    [(pageIndex)]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="LimitTrades($event)"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<div *ngIf="loading" class="py-36">
+  <app-e-loading></app-e-loading>
+</div>
 <table
   class="text-center xtable w-full"
   #mytable
@@ -101,7 +116,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<div class="float-left">
+<div class="float-left" [class.d-none]="loading">
   <mat-paginator
     #paginator
     [length]="trades.length"

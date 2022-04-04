@@ -1,4 +1,20 @@
+<div class="float-left" [class.d-none]="loading">
+  <mat-paginator
+    #paginator
+    [length]="users.length"
+    [(pageIndex)]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="LimitUsers($event)"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<div *ngIf="loading" class="py-36">
+  <app-e-loading></app-e-loading>
+</div>
 <table
+  *ngIf="!loading"
   class="text-center xtable w-full"
   #mytable
   mat-table
@@ -26,7 +42,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<div class="float-left">
+<div class="float-left" [class.d-none]="loading">
   <mat-paginator
     #paginator
     [length]="users.length"

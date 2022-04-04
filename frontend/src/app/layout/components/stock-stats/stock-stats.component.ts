@@ -25,13 +25,12 @@ interface queryParams {
 })
 export class StockStatsComponent implements OnInit, OnChanges {
   @Input() stats = [];
-  endpage = 10;
-  step = 10;
+  @Input() loading;
   statsOriginal;
   pageEvent: PageEvent;
-  pageSize = 10;
+  pageSize = 5;
   pageIndex = 0;
-  pageSizeOptions: number[] = [10, 20, 50, 100, 500];
+  pageSizeOptions: number[] = [5, 10, 20, 50, 100];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [
     "stock",
@@ -74,18 +73,13 @@ export class StockStatsComponent implements OnInit, OnChanges {
         end: moment(data.end_date).format("yyyy-MM-DD"),
       };
       console.log("qparams >> ", qparams);
+      this.loading = true;
       this.stats = await this.api.getStockStats(qparams);
+      this.loading = true;
       this.generateTable();
     }
   }
-  /* -------------------------------- loadMore; ------------------------------- */
-  loadMore() {
-    if (this.stats && this.stats.length <= this.endpage + this.step) {
-      this.endpage = this.stats.length;
-    } else {
-      this.endpage = this.endpage + this.step;
-    }
-  }
+
   /* ------------------------------- ngOnChanges ------------------------------ */
   ngOnChanges(changes: SimpleChanges) {
     // console.log('changes ---> ', changes);

@@ -1,0 +1,62 @@
+<section id="e-loading">
+  <!-- ----------------------------------------------------------------------- -->
+  <!--                                  table                                  -->
+  <!-- ----------------------------------------------------------------------- -->
+  <ng-container *ngIf="type == 'table'">
+    <table id="table">
+      <tbody>
+        <tr *ngFor="let row of rows">
+          <td *ngFor="let col of cols" class="loading-table" width="25%">
+            <span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <!-- ----------------------------------------------------------------------- -->
+  <!--                                 ripple                                  -->
+  <!-- ----------------------------------------------------------------------- -->
+  <ng-container *ngIf="type == 'ripple'">
+    <div id="ripple">
+      <div class="lds-ripple d-block mt-4 mx-auto">
+        <div [style.borderColor]="color"></div>
+        <div [style.borderColor]="color"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="type == 'tavanir'">
+    <div id="tavanir-loader">
+      <div class="tavanir-loading">
+        <div class="tavanir-icon">
+          <div
+            class="
+              row
+              text-center
+              justify-content-center
+              align-items-end
+              h-100
+              pt-4
+            "
+          >
+            <div class="col-12">
+              <img src="./assets/tavanir.png" width="70" />
+            </div>
+            <div class="col-12">
+              <div class="loader">
+                <div class="dot dot1"></div>
+                <div class="dot dot2"></div>
+                <div class="dot dot3"></div>
+                <div class="dot dot4"></div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <p class="bc links text-center bold">لطفا شکیبا باشید</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

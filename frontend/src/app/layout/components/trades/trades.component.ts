@@ -23,6 +23,8 @@ interface queryParams {
 })
 export class TradesComponent implements OnInit {
   @Input() trades = [];
+  @Input() loading;
+
   endpage = 10;
   step = 10;
   tradesOriginal;

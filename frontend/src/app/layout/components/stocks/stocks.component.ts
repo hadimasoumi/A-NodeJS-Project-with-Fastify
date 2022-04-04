@@ -19,8 +19,7 @@ import { StockApiService } from "src/app/shared/api/stock-api.service";
 })
 export class StocksComponent implements OnInit, OnChanges {
   @Input() stocks = [];
-  endpage = 10;
-  step = 10;
+  @Input() loading;
   stocksOriginal;
   pageEvent: PageEvent;
   pageSize = 10;
@@ -41,15 +40,6 @@ export class StocksComponent implements OnInit, OnChanges {
   /* ------------------------------- ngOnChanges ------------------------------ */
   ngOnChanges(changes: SimpleChanges) {
     if (changes.stocks) this.generateTable();
-  }
-
-  /* -------------------------------- loadMore; ------------------------------- */
-  loadMore() {
-    if (this.stocks && this.stocks.length <= this.endpage + this.step) {
-      this.endpage = this.stocks.length;
-    } else {
-      this.endpage = this.endpage + this.step;
-    }
   }
 
   /* ------------------------------- LimitOrders ------------------------------ */
