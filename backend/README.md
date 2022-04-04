@@ -1,6 +1,7 @@
 # About The Project
 
-This is the Backend section of the trial project. It is developed using Nodejs/Fastify/TypeSctipt.
+This is the Backend section of the trial project. It is developed using Nodejs/Fastify/TypeSctipt. \
+Open [https://condo-api.hadi-masoumi.ir](https://condo-api.hadi-masoumi.ir) to view a live lounched project.
 
 #### Prerequisites to running the API:
 
