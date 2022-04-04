@@ -1,0 +1,69 @@
+{
+  "configVersion": 1,
+  "timestamp": 1649049286541,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/463.b68ac0af63e97a4a.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.f12fca708b1473c4.js",
+        "/manifest.webmanifest",
+        "/polyfills.db7cf85de52076d7.js",
+        "/runtime.39cd6d284169d5cc.js",
+        "/styles.80c2c9e6dc2f028d.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/js/flowbite.js"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/463.b68ac0af63e97a4a.js": "fadc324c4f6a3496fc5cdd486934e87308700743",
+    "/assets/js/flowbite.js": "af202a3dbe40c7499045687b5a21c771a1da3314",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "be57edeffad8ac2396700ec29402ece57cdc5b82",
+    "/main.f12fca708b1473c4.js": "2e01b9ee243e0473567e10f12186df8783322395",
+    "/manifest.webmanifest": "dfcbed294d9f8396197b70aa4dc6120623b2c333",
+    "/polyfills.db7cf85de52076d7.js": "fc108af1382819703efdf9fc309e0a59c016a02f",
+    "/runtime.39cd6d284169d5cc.js": "eae70afc0432cceb3239ab29c24ad8ddef239ce0",
+    "/styles.80c2c9e6dc2f028d.css": "babd30a2942aac7412b91d9bc66e2294a9adc7da"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
