@@ -10,6 +10,10 @@ Open [https://condo-api.hadi-masoumi.ir](https://condo-api.hadi-masoumi.ir) to v
 - PHPMyAdmin (MariaDB/MySQL2)
 - NPM (optional)
 
+#### Before the run
+
+You need install PHPMyAdmin (MariaDB/MySQL2) on your server. Then you should update the environement configs in `/config` file.
+
 ## Available Scripts
 
 First, you need to install the modules using `npm install` or `npm i`
