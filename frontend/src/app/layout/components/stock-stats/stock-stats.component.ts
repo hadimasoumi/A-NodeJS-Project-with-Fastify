@@ -37,6 +37,7 @@ export class StockStatsComponent implements OnInit {
     "max_rise",
     "max_fall",
     "chart",
+    "message",
   ];
   @ViewChild(MatSort, { static: true }) newSort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

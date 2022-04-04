@@ -1,5 +1,6 @@
 <div class="">
   <form
+    *ngIf="form"
     [formGroup]="form"
     (ngSubmit)="search()"
     class="flex items-center justify-start py-3 px-3 gap-7"
@@ -60,45 +61,59 @@
   </ng-container>
 
   <ng-container matColumnDef="fluctuations">
-    <th width="20%" mat-header-cell *matHeaderCellDef mat-sort-header>
+    <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>
       Fluctuations
     </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.fluctuations }}
+      {{ element.fluctuations || "-" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="max_rise">
-    <th width="20%" mat-header-cell *matHeaderCellDef mat-sort-header>
+    <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>
       Max Rise
     </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.max_rise }}
+      {{ element.max_rise || "-" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="max_fall">
-    <th width="20%" mat-header-cell *matHeaderCellDef mat-sort-header>
+    <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>
       Max Fall
     </th>
     <td mat-cell *matCellDef="let element" class="">
-      {{ element.max_fall }}
+      {{ element.max_fall || "-" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="chart">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Chart</th>
+    <th width="30%" mat-header-cell *matHeaderCellDef mat-sort-header>Chart</th>
     <td mat-cell *matCellDef="let element" class="">
       <app-line-chart
+        *ngIf="element.prices"
         [data]="element.prices"
         [labels]="element.labels"
       ></app-line-chart>
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="message">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Message</th>
+    <td mat-cell *matCellDef="let element" class="">
+      {{ element?.message }}
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<div *ngIf="!(stats?.length > 0)">
+  <p class="py-36 text-center">
+    Choose a date range then click on Search Button
+  </p>
+</div>
 
 <div class="float-left">
   <mat-paginator
