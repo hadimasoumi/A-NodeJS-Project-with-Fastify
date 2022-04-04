@@ -21,7 +21,7 @@ export class StockApiService {
     return this.httpService.requestCreator(
       "get", // method
       undefined, // payload
-      "/stocks/stats", // url
+      "/stocks/statsWithPrices", // url
       queryParams
     );
   }
