@@ -7,6 +7,7 @@ declare function GetTradesByUserId(UserID: number): Promise<TradeGetResponseInte
 declare function GetStockHightLowPriceBySymbol(symbol: string, startDate?: string, endDate?: string): Promise<any>;
 declare function GetStockStatsBySymbol(symbol: string, startDate?: string, endDate?: string): Promise<void | TradeHistoryStatsInterface>;
 declare function GetStocksStats(startDate?: string, endDate?: string): Promise<any>;
+declare function GetStocksStatsWithPrices(startDate?: string, endDate?: string): Promise<any>;
 declare const _default: {
     GetAllTrades: typeof GetAllTrades;
     CreateTrade: typeof CreateTrade;
@@ -16,5 +17,6 @@ declare const _default: {
     GetStockStatsBySymbol: typeof GetStockStatsBySymbol;
     GetStockHightLowPriceBySymbol: typeof GetStockHightLowPriceBySymbol;
     GetStocksStats: typeof GetStocksStats;
+    GetStocksStatsWithPrices: typeof GetStocksStatsWithPrices;
 };
 export default _default;

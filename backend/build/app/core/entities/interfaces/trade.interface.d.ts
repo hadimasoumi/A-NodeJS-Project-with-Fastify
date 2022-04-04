@@ -38,6 +38,13 @@ interface TradeHistoryStatsInterface {
     max_rise?: number;
     max_fall?: number;
     message?: string;
+}
+interface TradeHistoryStatsWithPricesInterface {
+    stock: string;
+    fluctuations?: number;
+    max_rise?: number;
+    max_fall?: number;
+    message?: string;
     prices?: Array<number>;
 }
-export { TradeCreateRequestInterface, TradeCreateDBInterface, TradeGetResponseInterface, TradeHistoryHighLowPriceInterface, TradeHistoryStatsInterface, };
+export { TradeCreateRequestInterface, TradeCreateDBInterface, TradeGetResponseInterface, TradeHistoryHighLowPriceInterface, TradeHistoryStatsInterface, TradeHistoryStatsWithPricesInterface, };

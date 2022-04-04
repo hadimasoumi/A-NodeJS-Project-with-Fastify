@@ -29,6 +29,14 @@ class StockRoutes {
             }, reply);
             await reply;
         });
+        fastify.get(`/statsWithPrices`, async (request, reply) => {
+            (0, response_handler_1.default)(async () => {
+                const queryParams = request.query;
+                const data = await trade_controller_1.default.GetStocksStatsWithPrices(queryParams.start, queryParams.end);
+                return data;
+            }, reply);
+            await reply;
+        });
         fastify.get(`/stats/:symbol`, async (request, reply) => {
             (0, response_handler_1.default)(async () => {
                 const params = request.params;

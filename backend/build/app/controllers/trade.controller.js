@@ -207,7 +207,6 @@ async function GetStockStatsBySymbol(symbol, startDate, endDate) {
             response.fluctuations = stats === null || stats === void 0 ? void 0 : stats.fluctuations;
             response.max_rise = stats === null || stats === void 0 ? void 0 : stats.max_rise;
             response.max_fall = stats === null || stats === void 0 ? void 0 : stats.max_fall;
-            response.prices = prices;
         }
         console.log("response >> ", response);
         return response;
@@ -222,6 +221,43 @@ async function GetStocksStats(startDate, endDate) {
         const stocks = await stock_controller_1.default.GetAllStocks();
         for (const stock of stocks) {
             const response = (await GetStockStatsBySymbol(stock.symbol, startDate, endDate));
+            result.push(response);
+        }
+        return result;
+    }
+    catch (error) {
+        console.log("error in tradeHistoryHandler -> findAllTradeHistoryBySymbol ---> ", error);
+    }
+}
+async function GetStockStatsWithPricesBySymbol(symbol, startDate, endDate) {
+    let response = { stock: symbol };
+    return GetTradesBySymbol(symbol, startDate, endDate)
+        .then(async (trades) => {
+        console.log("trades.length >> ", trades.length);
+        if (trades.length == 0) {
+            response.message = "There are no trades in the given date range";
+        }
+        else {
+            const prices = trades.map((x) => x.price);
+            const stats = await detectStockFluctuation(prices);
+            response.fluctuations = stats === null || stats === void 0 ? void 0 : stats.fluctuations;
+            response.max_rise = stats === null || stats === void 0 ? void 0 : stats.max_rise;
+            response.max_fall = stats === null || stats === void 0 ? void 0 : stats.max_fall;
+            response.prices = prices;
+        }
+        console.log("response >> ", response);
+        return response;
+    })
+        .catch((error) => {
+        console.log("error >> ", error);
+    });
+}
+async function GetStocksStatsWithPrices(startDate, endDate) {
+    let result = [];
+    try {
+        const stocks = await stock_controller_1.default.GetAllStocks();
+        for (const stock of stocks) {
+            const response = (await GetStockStatsWithPricesBySymbol(stock.symbol, startDate, endDate));
             result.push(response);
         }
         return result;
@@ -263,7 +299,6 @@ function detectStockFluctuation(prices) {
         rises.length > 0 ? parseFloat(Math.max(...rises).toFixed(2)) : 0.0;
     result.max_fall =
         falls.length > 0 ? parseFloat(Math.max(...falls).toFixed(2)) : 0.0;
-    console.log("result 33333 >> ", result);
     return result;
 }
 exports.default = {
@@ -275,5 +310,6 @@ exports.default = {
     GetStockStatsBySymbol,
     GetStockHightLowPriceBySymbol,
     GetStocksStats,
+    GetStocksStatsWithPrices,
 };
 //# sourceMappingURL=trade.controller.js.map
