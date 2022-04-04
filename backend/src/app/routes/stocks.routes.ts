@@ -46,6 +46,21 @@ class StockRoutes {
       await reply;
     });
 
+    fastify.get(`/statsWithPrices`, async (request, reply) => {
+      responseHandler(async () => {
+        const queryParams = request.query as {
+          start: string;
+          end: string;
+        };
+        const data = await TradeController.GetStocksStatsWithPrices(
+          queryParams.start,
+          queryParams.end
+        );
+        return data;
+      }, reply);
+      await reply;
+    });
+
     // Get stats by symbol
     fastify.get(`/stats/:symbol`, async (request, reply) => {
       responseHandler(async () => {

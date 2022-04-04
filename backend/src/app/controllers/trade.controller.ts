@@ -5,6 +5,7 @@ import {
   TradeGetResponseInterface,
   TradeHistoryStatsInterface,
   TradeHistoryHighLowPriceInterface,
+  TradeHistoryStatsWithPricesInterface,
 } from "../core/entities/interfaces/trade.interface";
 import {
   StockInterface,
@@ -243,7 +244,7 @@ async function GetStockStatsBySymbol(
         response.fluctuations = stats?.fluctuations;
         response.max_rise = stats?.max_rise;
         response.max_fall = stats?.max_fall;
-        response.prices = prices;
+        // response.prices = prices;
       }
       console.log("response >> ", response);
 
@@ -269,6 +270,62 @@ async function GetStocksStats(
         startDate,
         endDate
       )) as TradeHistoryStatsInterface;
+      result.push(response);
+    }
+    return result;
+  } catch (error) {
+    console.log(
+      "error in tradeHistoryHandler -> findAllTradeHistoryBySymbol ---> ",
+      error
+    );
+    // throw new Error(error.toString());
+  }
+}
+
+async function GetStockStatsWithPricesBySymbol(
+  symbol: string,
+  startDate?: string,
+  endDate?: string
+) {
+  let response: TradeHistoryStatsWithPricesInterface = { stock: symbol };
+  return GetTradesBySymbol(symbol, startDate, endDate)
+    .then(async (trades) => {
+      console.log("trades.length >> ", trades.length);
+      if (trades.length == 0) {
+        response.message = "There are no trades in the given date range";
+      } else {
+        const prices = trades.map((x) => x.price);
+        const stats = await detectStockFluctuation(prices);
+        response.fluctuations = stats?.fluctuations;
+        response.max_rise = stats?.max_rise;
+        response.max_fall = stats?.max_fall;
+        response.prices = prices;
+      }
+      console.log("response >> ", response);
+
+      return response;
+    })
+    .catch((error) => {
+      console.log("error >> ", error);
+    });
+}
+
+async function GetStocksStatsWithPrices(
+  startDate?: string,
+  endDate?: string
+): Promise<any> {
+  let result: Array<TradeHistoryStatsWithPricesInterface> = [];
+
+  try {
+    const stocks: StockHighLowInterface[] =
+      await StockController.GetAllStocks();
+    for (const stock of stocks) {
+      const response: TradeHistoryStatsWithPricesInterface =
+        (await GetStockStatsWithPricesBySymbol(
+          stock.symbol,
+          startDate,
+          endDate
+        )) as TradeHistoryStatsWithPricesInterface;
       result.push(response);
     }
     return result;
@@ -319,9 +376,7 @@ function detectStockFluctuation(prices: Array<number>) {
   result.max_fall =
     falls.length > 0 ? parseFloat(Math.max(...falls).toFixed(2)) : 0.0;
 
-  console.log("result 33333 >> ", result);
   return result;
-  // } else return null;
 }
 
 export default {
@@ -333,4 +388,5 @@ export default {
   GetStockStatsBySymbol,
   GetStockHightLowPriceBySymbol,
   GetStocksStats,
+  GetStocksStatsWithPrices,
 };
