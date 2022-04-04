@@ -22,13 +22,13 @@ interface queryParams {
 })
 export class StockHighlowComponent implements OnInit {
   stats = [];
-  endpage = 50;
-  step = 50;
+  endpage = 10;
+  step = 10;
   statsOriginal;
   pageEvent: PageEvent;
-  pageSize = 50;
+  pageSize = 10;
   pageIndex = 0;
-  pageSizeOptions: number[] = [50, 75, 100, 125, 150];
+  pageSizeOptions: number[] = [10, 20, 50, 100, 500];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ["symbol", "highest", "lowest"];
   @ViewChild(MatSort, { static: true }) newSort: MatSort;

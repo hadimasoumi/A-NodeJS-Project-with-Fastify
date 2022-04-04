@@ -29,7 +29,7 @@ export class TradesComponent implements OnInit {
   pageEvent: PageEvent;
   pageSize = 10;
   pageIndex = 0;
-  pageSizeOptions: number[] = [50, 75, 100, 125, 150];
+  pageSizeOptions: number[] = [10, 20, 50, 100, 500];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [
     "id",
