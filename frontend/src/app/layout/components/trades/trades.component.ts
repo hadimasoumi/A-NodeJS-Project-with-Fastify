@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -21,7 +22,7 @@ interface queryParams {
   styleUrls: ["./trades.component.scss"],
 })
 export class TradesComponent implements OnInit {
-  trades = [];
+  @Input() trades = [];
   endpage = 10;
   step = 10;
   tradesOriginal;
