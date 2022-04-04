@@ -1,0 +1,12 @@
+app:
+  domain: localhost
+  kind: development
+  port: 8085
+
+db:
+  mariaDB:
+    username: hadi
+    password: "2050571"
+    host: localhost
+    port: 3306
+    name: stock_trade
