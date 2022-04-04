@@ -1,27 +1,34 @@
-# TvnShopping
+# About The Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+This is the Frontend section of the trial project. It is developed using Angular/TypeSctipt.
 
-## Development server
+#### Prerequisites to running the API:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Node.js
+- Angular 13
+- Git
+- NPM (optional)
 
-## Code scaffolding
+## Available Scripts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+First, you need to install the modules using `npm install` or `npm i`
 
-## Build
+Then, in the project directory, you can run:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### `npm start`
 
-## Running unit tests
+Runs the app in the development mode.\
+Open [http://localhost:8080](http://localhost:8081) to view it in your browser.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Running end-to-end tests
+### `npm run build`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Builds the app for production to the `dist` folder.\
 
-## Further help
+Your app is ready to be deployed!
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Learn More
+
+### Description
