@@ -12,7 +12,7 @@ class TradeRoutes {
     async routes(fastify, options, done) {
         fastify.get(`/`, async (request, reply) => {
             (0, response_handler_1.default)(async () => {
-                const data = await trade_controller_1.default.findAllTrades();
+                const data = await trade_controller_1.default.GetAllTrades();
                 return data;
             }, reply);
             await reply;
@@ -21,7 +21,7 @@ class TradeRoutes {
             const params = request.params;
             const queryParams = request.query;
             (0, response_handler_1.default)(async () => {
-                const data = await trade_controller_1.default.findTradesBySymbol(params.symbol, queryParams.start, queryParams.end);
+                const data = await trade_controller_1.default.GetTradesBySymbol(params.symbol, queryParams.start, queryParams.end);
                 return data;
             }, reply);
             await reply;
@@ -30,18 +30,18 @@ class TradeRoutes {
             (0, response_handler_1.default)(async () => {
                 const reqCreate = request.body;
                 console.log(reqCreate);
-                const data = await trade_controller_1.default.createTrade(reqCreate);
+                const data = await trade_controller_1.default.CreateTrade(reqCreate);
                 return data;
-            }, reply, 201);
+            }, reply);
             await reply;
         });
         fastify.get(`/users/:UserID`, async (request, reply) => {
             (0, response_handler_1.default)(async () => {
                 const params = request.params;
                 const UserID = parseInt(params["UserID"], 10);
-                const data = await trade_controller_1.default.getTradeByUserId(UserID);
+                const data = await trade_controller_1.default.GetTradesByUserId(UserID);
                 return data;
-            }, reply, 201);
+            }, reply);
             await reply;
         });
         done();

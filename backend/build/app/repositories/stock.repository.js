@@ -9,13 +9,13 @@ class StockRepository {
         this.createStockIfNotExists = async (reqCreate) => {
             const stockRepository = StockRepository.getInstance();
             return stockRepository
-                .getStockBySymbol(reqCreate.symbol)
+                .GetStockBySymbol(reqCreate.symbol)
                 .then(async (result) => {
                 if (result.length > 0) {
                     return result[0];
                 }
                 else {
-                    return this.createStock(reqCreate);
+                    return this.CreateStock(reqCreate);
                 }
             })
                 .catch((error) => {
@@ -29,16 +29,16 @@ class StockRepository {
         }
         return StockRepository.instance;
     }
-    async deleteAllStocks() {
+    async DeleteAllStocks() {
         return schemas_1.default.Stock.destroy({
             where: {},
             force: true,
         });
     }
-    async findAllStocks() {
+    async GetAllStocks() {
         return await schemas_1.default.Stock.findAll();
     }
-    async updateStock(stock) {
+    async UpdateStock(stock) {
         try {
             const result = await schemas_1.default.Stock.update({
                 price: stock.price,
@@ -51,7 +51,7 @@ class StockRepository {
         }
         catch (error) { }
     }
-    async getStockBySymbol(symbol) {
+    async GetStockBySymbol(symbol) {
         try {
             const result = await schemas_1.default.Stock.findAll({
                 where: {
@@ -62,7 +62,7 @@ class StockRepository {
         }
         catch (error) { }
     }
-    async createStock(stock) {
+    async CreateStock(stock) {
         if (stock.symbol == "AAV")
             console.log("stock33333 >> ");
         return schemas_1.default.Stock.create(stock)
@@ -74,7 +74,7 @@ class StockRepository {
             throw new Error(error);
         });
     }
-    async upsertStock(stock) {
+    async UpsertStock(stock) {
         try {
             const result = await schemas_1.default.Stock.upsert(stock);
             console.log("result ---> ", result);

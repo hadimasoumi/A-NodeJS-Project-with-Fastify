@@ -1,20 +1,12 @@
 app:
   kind: production
   domain: localhost
-  port: 8088
+  port: 8808
 
 db:
-  mongo:
-    username: root
-    password: root
-    host: localhost
-    port: 27017
-    name: stock_trade
-    auth: admin
-    collection: trades
   mariaDB:
-    username: hadi
-    password: "2050571"
+    username: hadimasu_user
+    password: "ZkHRUiDs5xnW"
     host: localhost
     port: 3306
-    name: stock_trade
+    name: hadimasu_db

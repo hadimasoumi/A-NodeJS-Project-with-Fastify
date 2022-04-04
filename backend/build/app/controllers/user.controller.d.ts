@@ -1,10 +1,10 @@
 import { UserInterface } from "../core/entities/interfaces/user.interface";
-declare function deleteAllUsers(): Promise<any>;
-declare function createUser(reqCreate: UserInterface): Promise<any>;
-declare function getUserById(UserID: number): Promise<any>;
+declare function DeleteAllUsers(): Promise<any>;
+declare function CreateUser(reqCreate: UserInterface): Promise<any>;
+declare function GetUserById(UserID: number): Promise<any>;
 declare const _default: {
-    deleteAllUsers: typeof deleteAllUsers;
-    createUser: typeof createUser;
-    getUserById: typeof getUserById;
+    DeleteAllUsers: typeof DeleteAllUsers;
+    CreateUser: typeof CreateUser;
+    GetUserById: typeof GetUserById;
 };
 export default _default;

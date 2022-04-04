@@ -14,7 +14,7 @@ class TradeRepository {
         }
         return TradeRepository.instance;
     }
-    async findAllTrades() {
+    async GetAllTrades() {
         const result = await schemas_1.default.Trade.findAll({
             include: [
                 {
@@ -32,7 +32,7 @@ class TradeRepository {
         });
         return result;
     }
-    async findTradesBySymbol(symbol, startDate, endDate) {
+    async GetTradesBySymbol(symbol, startDate, endDate) {
         let whereClause = {};
         if (startDate && endDate) {
             whereClause["createdAt"] = {
@@ -67,7 +67,7 @@ class TradeRepository {
         });
         return result;
     }
-    createTrade(trade) {
+    CreateTrade(trade) {
         const object = {
             type: trade.type,
             user_id: trade.user_id,
@@ -81,7 +81,7 @@ class TradeRepository {
             object["id"] = trade.id;
         return schemas_1.default.Trade.create(object);
     }
-    async getTradeByUserId(id) {
+    async GetTradesByUserId(id) {
         try {
             const result = await schemas_1.default.Trade.findAll({
                 include: [
@@ -105,19 +105,48 @@ class TradeRepository {
         }
         catch (error) { }
     }
-    getTradeById(id) {
+    GetTradeById(id) {
         return schemas_1.default.Trade.findAll({
             where: {
                 id: id,
             },
         });
     }
-    async deleteAllTrades() {
-        const res = await schemas_1.default.Trade.destroy({
+    DeleteAllTrades() {
+        return schemas_1.default.Trade.destroy({
             where: {},
             force: true,
         });
-        return true;
+    }
+    async GetTradesByStockId(stockId, startDate, endDate) {
+        let whereClause = {};
+        if (startDate && endDate) {
+            whereClause["createdAt"] = {
+                [core_1.Op.between]: [
+                    startDate
+                        ? (0, moment_1.default)(startDate).format("YYYY-MM-DD")
+                        : (0, moment_1.default)().format("YYYY-MM-DD"),
+                    endDate
+                        ? (0, moment_1.default)(endDate).format("YYYY-MM-DD")
+                        : (0, moment_1.default)().format("YYYY-MM-DD HH:mm:ss"),
+                ],
+            };
+        }
+        return await schemas_1.default.Trade.findAll({
+            attributes: ["price", "shares", "createdAt"],
+            include: [
+                {
+                    model: schemas_1.default.Stock,
+                    attributes: ["symbol"],
+                    required: true,
+                    where: {
+                        id: stockId,
+                    },
+                    order: [["symbol", "ASC"]],
+                },
+            ],
+            where: whereClause,
+        });
     }
 }
 exports.default = TradeRepository;

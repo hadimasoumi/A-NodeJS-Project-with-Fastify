@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_repository_1 = __importDefault(require("../repositories/user.repository"));
-async function deleteAllUsers() {
+async function DeleteAllUsers() {
     const userRepository = user_repository_1.default.getInstance();
     userRepository
-        .deleteAllUsers()
+        .DeleteAllUsers()
         .then((result) => {
         return result;
     })
@@ -16,18 +16,18 @@ async function deleteAllUsers() {
         throw new Error("400 : " + error.toString());
     });
 }
-async function createUser(reqCreate) {
+async function CreateUser(reqCreate) {
     const userRepository = user_repository_1.default.getInstance();
     let finalresult;
     if (reqCreate != undefined && reqCreate != null && reqCreate.name) {
         if (reqCreate.id) {
-            const res = await userRepository.getUserById(reqCreate.id);
+            const res = await userRepository.GetUserById(reqCreate.id);
             if (res.length > 0) {
                 return `200 : Save data is successfully.`;
             }
         }
         await userRepository
-            .createUser(reqCreate)
+            .CreateUser(reqCreate)
             .then(async (result) => {
             finalresult = `201 : Save data is successfully`;
         })
@@ -40,10 +40,10 @@ async function createUser(reqCreate) {
     }
     return finalresult;
 }
-async function getUserById(UserID) {
+async function GetUserById(UserID) {
     const userRepository = user_repository_1.default.getInstance();
     return userRepository
-        .getUserById(UserID)
+        .GetUserById(UserID)
         .then((result) => {
         return result;
     })
@@ -52,8 +52,8 @@ async function getUserById(UserID) {
     });
 }
 exports.default = {
-    deleteAllUsers,
-    createUser,
-    getUserById,
+    DeleteAllUsers,
+    CreateUser,
+    GetUserById,
 };
 //# sourceMappingURL=user.controller.js.map

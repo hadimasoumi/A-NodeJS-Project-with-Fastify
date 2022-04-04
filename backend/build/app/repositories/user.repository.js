@@ -12,19 +12,19 @@ class UserRepository {
         }
         return UserRepository.instance;
     }
-    async deleteAllUsers() {
+    async DeleteAllUsers() {
         return schemas_1.default.User.destroy({
             where: {},
             force: true,
         });
     }
-    async findAllUsers() {
+    async GetAllUsers() {
         const result = await schemas_1.default.Trade.findAll({
             order: [["id", "ASC"]],
         });
         return result;
     }
-    createUser(user) {
+    CreateUser(user) {
         const object = {
             name: user.name,
         };
@@ -32,7 +32,7 @@ class UserRepository {
             object["id"] = user.id;
         return schemas_1.default.User.create(object);
     }
-    getUserById(id) {
+    GetUserById(id) {
         return schemas_1.default.User.findAll({
             where: {
                 id: id,

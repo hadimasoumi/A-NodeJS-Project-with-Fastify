@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@sequelize/core");
-const sequelizeORM_1 = __importDefault(require("../../../core/adapters/sequelizeORM"));
+const sequelizeORM_1 = __importDefault(require("../../adapters/sequelizeORM"));
 class Stock extends core_1.Model {
 }
 Stock.init({
