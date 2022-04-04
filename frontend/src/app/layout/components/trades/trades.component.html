@@ -60,6 +60,7 @@
   <app-e-loading></app-e-loading>
 </div>
 <table
+  *ngIf="!loading"
   class="text-center xtable w-full"
   #mytable
   mat-table
