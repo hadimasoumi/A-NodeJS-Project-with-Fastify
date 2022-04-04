@@ -1,7 +1,6 @@
 # About The Project
 
-This is the Backend section of the trial project. It is developed using Nodejs/Fastify/TypeSctipt. \
-Open [https://condo-api.hadi-masoumi.ir](https://condo-api.hadi-masoumi.ir) to view a live lounched project.
+This is the Backend section of the trial project. It is developed using Nodejs/Fastify/TypeSctipt.
 
 #### Prerequisites to running the API:
 
@@ -9,10 +8,6 @@ Open [https://condo-api.hadi-masoumi.ir](https://condo-api.hadi-masoumi.ir) to v
 - Git
 - PHPMyAdmin (MariaDB/MySQL2)
 - NPM (optional)
-
-#### Before the run
-
-You need install PHPMyAdmin (MariaDB/MySQL2) on your server. Then you should update the environement configs in `/config` file.
 
 ## Available Scripts
 
@@ -48,6 +43,12 @@ Launches the jest test cases wriiten in test folder.\
 See the section about [running tests by ts-jest](https://github.com/kulshekhar/ts-jest) for more information.
 
 ## Learn More
+
+### Architecture
+
+Here is a brief diagram of this project Architecture.
+
+![Architecture](./design/Architecture.png)
 
 ### Description
 
