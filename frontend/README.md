@@ -1,6 +1,7 @@
 # About The Project
 
-This is the Frontend section of the trial project. It is developed using Angular/TypeSctipt.
+This is the Frontend section of the trial project. It is developed using Angular/TypeSctipt. \
+Open [https://condo-front.hadi-masoumi.ir](https://condo-front.hadi-masoumi.ir) to view a live lounched project.
 
 #### Prerequisites to running the API:
 
