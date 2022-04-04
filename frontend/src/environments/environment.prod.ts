@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  hostname: "http://condo-api.hadi-masoumi.ir",
+  hostname: "https://condo-api.hadi-masoumi.ir",
+  // hostname: "http://localhost:8085",
 };

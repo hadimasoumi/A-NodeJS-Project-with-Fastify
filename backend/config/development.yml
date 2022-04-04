@@ -1,7 +1,7 @@
 app:
   domain: localhost
   kind: development
-  port: 8085
+  port: 8080
 
 db:
   mariaDB:
