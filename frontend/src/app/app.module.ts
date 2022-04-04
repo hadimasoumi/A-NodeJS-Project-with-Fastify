@@ -7,12 +7,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { NgxCaptchaModule } from "ngx-captcha";
 import { LoaderInterceptor } from "./shared/service/interceptors";
 import { LoadingService } from "./shared/service/utils";
 import { SharedModule } from "./shared/shared.module";
-// import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +22,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
-    NgxCaptchaModule,
   ],
   providers: [
     LoadingService,

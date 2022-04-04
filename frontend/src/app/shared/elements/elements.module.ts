@@ -3,8 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-
 import { MaterialModule } from "../material/material.module";
 import { PipesModule } from "../pipes/pipes.module";
 
@@ -17,7 +15,6 @@ import { PipesModule } from "../pipes/pipes.module";
     ReactiveFormsModule,
     RouterModule,
     PipesModule,
-    NgbModule,
   ],
   exports: [],
   providers: [],

@@ -2,14 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import { HttpClient } from "@angular/common/http";
 import { ErrorHandlerService } from "./error-handler.service";
-// import { LoadingService } from './loading.service';
 import { CustomStorageService } from "./custom-storage.service";
-import { TokenService } from "./token.service";
 import { NotificationService } from "./notification.service";
 import { environment } from "src/environments/environment";
-import { retry } from "rxjs/operators";
-import { ReCaptchaService } from "./reCaptcha.service";
-
 @Injectable({
   providedIn: "root",
 })
@@ -18,9 +13,7 @@ export class HttpService {
     private http: HttpClient,
     private errorHandleService: ErrorHandlerService,
     public customStorageService: CustomStorageService,
-    public tokenService: TokenService,
-    public notification: NotificationService,
-    public reCaptchaService: ReCaptchaService
+    public notification: NotificationService
   ) {}
 
   async requestCreator(
