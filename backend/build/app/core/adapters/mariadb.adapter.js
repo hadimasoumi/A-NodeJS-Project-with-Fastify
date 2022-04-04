@@ -5,12 +5,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelizeORM_1 = __importDefault(require("./sequelizeORM"));
 require("../entities/schemas");
-sequelizeORM_1.default
-    .sync({ force: false })
-    .then(() => {
-    console.log("MariaDB has connected 🎉");
-})
-    .catch((err) => {
-    console.log("**** error [MariaDB] : ", err);
-});
+sequelizeORM_1.default.sync({ force: false });
 //# sourceMappingURL=mariadb.adapter.js.map

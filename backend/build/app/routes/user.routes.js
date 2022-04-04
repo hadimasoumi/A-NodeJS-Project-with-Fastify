@@ -10,6 +10,13 @@ class TradeRoutes {
         this.prefix_route = "/users";
     }
     async routes(fastify, options, done) {
+        fastify.get(`/`, async (request, reply) => {
+            (0, response_handler_1.default)(async () => {
+                const data = await user_controller_1.default.GetAllUser();
+                return data;
+            }, reply);
+            await reply;
+        });
         fastify.post(`/create`, async (request, reply) => {
             (0, response_handler_1.default)(async () => {
                 const reqCreate = request.body;

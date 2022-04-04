@@ -19,7 +19,7 @@ class UserRepository {
         });
     }
     async GetAllUsers() {
-        const result = await schemas_1.default.Trade.findAll({
+        const result = await schemas_1.default.User.findAll({
             order: [["id", "ASC"]],
         });
         return result;
