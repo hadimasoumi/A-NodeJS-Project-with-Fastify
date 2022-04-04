@@ -11,14 +11,14 @@ class TradeRoutes {
     options: FastifyPluginOptions,
     done: any
   ) {
-    // fastify.get(`/`, async (request, reply) => {
-    //   responseHandler(async () => {
-    //     const data = await UserController.findAllTrades();
+    fastify.get(`/`, async (request, reply) => {
+      responseHandler(async () => {
+        const data = await UserController.GetAllUser();
 
-    //     return data;
-    //   }, reply);
-    //   await reply;
-    // });
+        return data;
+      }, reply);
+      await reply;
+    });
 
     fastify.post(`/create`, async (request, reply) => {
       responseHandler(

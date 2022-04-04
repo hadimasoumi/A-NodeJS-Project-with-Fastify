@@ -53,8 +53,21 @@ async function GetUserById(UserID: number) {
       throw new Error("400 : " + error.toString());
     });
 }
+
+async function GetAllUser() {
+  const userRepository = UserRepository.getInstance();
+  return userRepository
+    .GetAllUsers()
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      throw new Error("400 : " + error.toString());
+    });
+}
 export default {
   DeleteAllUsers,
   CreateUser,
   GetUserById,
+  GetAllUser,
 };

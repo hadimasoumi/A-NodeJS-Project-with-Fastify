@@ -21,7 +21,7 @@ class UserRepository {
   }
 
   public async GetAllUsers(): Promise<any> {
-    const result = await models.Trade.findAll({
+    const result = await models.User.findAll({
       order: [["id", "ASC"]],
     });
     return result;
