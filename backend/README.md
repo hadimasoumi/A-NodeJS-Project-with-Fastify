@@ -50,13 +50,15 @@ Here is a brief diagram of this project Architecture.
 
 ![Architecture](./.design/Architecture.png)
 
-### Description
+### Class Diagram
 
 In this project there are three main entities (User, Stock and Trade). The relations between these entities are describing as follow:
 
 - A **_User_** has many or zero **_Stock_**
 - A **_User_** has many or zero **_Trade_**
 - A **_Trade_** has only one **_Stock_**
+
+![ClassDiagram](./.design/classdiagram.png)
 
 Expect entities to look something like this:
 
