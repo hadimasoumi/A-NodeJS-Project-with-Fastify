@@ -48,7 +48,7 @@ See the section about [running tests by ts-jest](https://github.com/kulshekhar/t
 
 Here is a brief diagram of this project Architecture.
 
-![Architecture](./design/Architecture.png)
+![Architecture](./.design/Architecture.png)
 
 ### Description
 
