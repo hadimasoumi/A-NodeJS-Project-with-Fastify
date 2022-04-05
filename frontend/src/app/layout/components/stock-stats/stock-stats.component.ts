@@ -56,8 +56,6 @@ export class StockStatsComponent implements OnInit, OnChanges {
       start_date: [],
       end_date: [],
     });
-
-    console.log("this.stats >> ", this.stats);
   }
 
   async search() {
@@ -75,7 +73,7 @@ export class StockStatsComponent implements OnInit, OnChanges {
       console.log("qparams >> ", qparams);
       this.loading = true;
       this.stats = await this.api.getStockStats(qparams);
-      this.loading = true;
+      this.loading = false;
       this.generateTable();
     }
   }

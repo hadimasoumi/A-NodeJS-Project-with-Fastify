@@ -77,8 +77,11 @@ export class TradesComponent implements OnInit {
         start: moment(data.start_date).format("yyyy-MM-DD"),
         end: moment(data.end_date).format("yyyy-MM-DD"),
       };
-      console.log("qparams >> ", qparams);
+      // console.log("qparams >> ", qparams);
+      this.loading = true;
       this.trades = await this.api.GetTradesList(qparams);
+      this.loading = false;
+
       this.generateTable();
     }
   }
