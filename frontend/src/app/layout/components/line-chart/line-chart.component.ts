@@ -21,8 +21,8 @@ export class LineChartComponent implements OnInit {
         this.tinyLables.push("");
       }
     }
-    console.log("this.labels >> ", this.labels);
-    console.log("data >> ", this.data);
+    // console.log("this.labels >> ", this.labels);
+    // console.log("data >> ", this.data);
     this.chartData = {
       labels: this.tiny ? [...this.tinyLables] : this.labels,
       datasets: [{ label: "Prices", data: this.data, tension: 0 }],

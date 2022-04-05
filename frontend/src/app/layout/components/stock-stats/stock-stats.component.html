@@ -44,7 +44,7 @@
   </form>
 </div>
 
-<div class="float-left" [class.d-none]="loading">
+<!-- <div class="float-left">
   <mat-paginator
     #paginator
     [length]="stats.length"
@@ -54,7 +54,7 @@
     (page)="LimitStats($event)"
     showFirstLastButtons
   ></mat-paginator>
-</div>
+</div> -->
 
 <div *ngIf="loading" class="py-36">
   <app-e-loading></app-e-loading>
@@ -124,7 +124,7 @@
   <p class="py-36 text-center">No result found!</p>
 </div>
 
-<div class="float-left d-block" [class.d-none]="loading">
+<div class="float-left">
   <mat-paginator
     #paginator
     [length]="stats.length"

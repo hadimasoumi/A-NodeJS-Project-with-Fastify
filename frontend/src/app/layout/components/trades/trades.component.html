@@ -44,7 +44,7 @@
   </form>
 </div>
 
-<div class="float-left" [class.d-none]="loading">
+<!-- <div class="float-left" [class.d-none]="loading">
   <mat-paginator
     #paginator
     [length]="trades.length"
@@ -54,7 +54,7 @@
     (page)="LimitTrades($event)"
     showFirstLastButtons
   ></mat-paginator>
-</div>
+</div> -->
 
 <div *ngIf="loading" class="py-36">
   <app-e-loading></app-e-loading>
